@@ -5,7 +5,7 @@
         :headers="headers"
         :items="desserts"
         :search="search"
-        sort-by="calories"
+        sort-by="opciones"
         class="elevation-1"
       >
         <template v-slot:top>
@@ -50,26 +50,26 @@
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.calories"
-                          label="Calories"
+                          v-model="editedItem.opciones"
+                          label="opciones"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.fat"
-                          label="Fat (g)"
+                          v-model="editedItem.nombre"
+                          label="nombre"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.carbs"
-                          label="Carbs (g)"
+                          v-model="editedItem.descripcion"
+                          label="descripcion"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6" md="4">
                         <v-text-field
-                          v-model="editedItem.protein"
-                          label="Protein (g)"
+                          v-model="editedItem.estado"
+                          label="estado"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -130,33 +130,32 @@ export default {
         sortable: false,
         value: "name",
       },
-      { text: "Calories", value: "calories" },
-      { text: "Fat (g)", value: "fat" },
-      { text: "Carbs (g)", value: "carbs" },
-      { text: "Protein (g)", value: "protein" },
-      { text: "Actions", value: "actions", sortable: false },
+      { text: "Nombre", value: "nombre", sortable: false},
+      { text: "Estado", value: "estado", sortable: false},
+      { text: "Opciones", value: "opciones", sortable: false},
+      { text: "Descripcion", value: "descripcion", sortable: false},
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
       name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
+      opciones: 0,
+      nombre: 0,
+      descripcion: 0,
+      estado: 0,
     },
     defaultItem: {
       name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0,
+      opciones: 0,
+      nombre: 0,
+      descripcion: 0,
+      estado: 0,
     },
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item";
+      return this.editedIndex === -1 ? "Añadir un item" : "Editar item";
     },
   },
 
@@ -178,10 +177,10 @@ export default {
       this.desserts = [
         {
           name: "Frozen Yogurt",
-          calories: 159,
-          fat: 6.0,
-          carbs: 24,
-          protein: 4.0,
+          opciones: 159,
+          nombre: 6.0,
+          descripcion: 24,
+          estado: 4.0,
         },
       ];
     },
