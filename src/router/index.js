@@ -4,9 +4,9 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "ListItems",
-    component: () => import("../views/AdminView.vue")
+    path: "/categorias",
+    name: "Categorias",
+    component: () => import("../components/CRUDCategoria.vue")
   }
 ];
 

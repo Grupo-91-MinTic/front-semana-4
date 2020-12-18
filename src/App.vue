@@ -1,28 +1,31 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <v-app id="app">
+    <navigator-bar></navigator-bar>
+    <app-bar></app-bar>
+    <main-content></main-content>
+    <footer-section></footer-section>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import NavigatorBar from "./components/NavigatorBar.vue";
+import AppBar from "./components/AppBar.vue";
+import MainContent from "./components/MainContent.vue";
+import FooterSection from "./components/FooterSection.vue";
+export default {
+  name: "App",
 
-#nav {
-  padding: 30px;
-}
+  components: {
+    NavigatorBar,
+    AppBar,
+    MainContent,
+    FooterSection,
+  },
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  data() {
+    return {
+      drawer: null,
+    };
+  },
+};
+</script>
