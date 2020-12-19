@@ -1,6 +1,6 @@
 <template>
   <div>
-    <navigator-bar></navigator-bar>
+    <h2>hello</h2>
     <app-bar></app-bar>
     <main-content></main-content>
     <administration-footer></administration-footer>
@@ -9,14 +9,12 @@
 <script>
 import AppBar from "../components/AppBar.vue";
 import MainContent from "../components/MainContent.vue";
-import NavigatorBar from "../components/NavigatorBar.vue";
 import AdministrationFooter from '../components/AdministrationFooter.vue';
 export default {
   name: "Administration",
   components: {
     AppBar,
     MainContent,
-    NavigatorBar,
     AdministrationFooter,
   },
   data() {

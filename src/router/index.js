@@ -22,6 +22,15 @@ const routes = [
       public: true
     }
   },
+
+  {
+    path: '/administration',
+    name: 'Administration',
+    component: () => import('../views/Administration.vue'),
+    meta: {
+      auth: false
+    }
+  },
   {
     path: '/categoria',
     name: 'Categoria',
