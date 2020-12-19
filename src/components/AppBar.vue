@@ -23,7 +23,7 @@
             </v-list-item>
             <v-list-item :to="{ name: 'categoria' }">
               <v-list-item-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>mdi-view-dashboard</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title> Categorias </v-list-item-title>
@@ -31,7 +31,7 @@
             </v-list-item>
             <v-list-item :to="{ name: 'articulo' }">
               <v-list-item-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>mdi-clipboard-edit</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title> Articulos </v-list-item-title>
@@ -48,7 +48,7 @@
             </v-list-item>
             <v-list-item :to="{ name: 'venta' }">
               <v-list-item-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>mdi-piggy-bank</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title> Ventas </v-list-item-title>
@@ -56,7 +56,7 @@
             </v-list-item>
             <v-list-item :to="{ name: 'cliente' }">
               <v-list-item-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>mdi-account-group</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title> Clientes </v-list-item-title>
@@ -72,7 +72,7 @@
             </v-list-item>
             <v-list-item :to="{ name: 'user' }">
               <v-list-item-action>
-                <v-icon>table_chart</v-icon>
+                <v-icon>mdi-account</v-icon>
               </v-list-item-action>
               <v-list-item-content>
                 <v-list-item-title> Usuario </v-list-item-title>
@@ -90,7 +90,7 @@
     >
       <v-toolbar-title style="width: 300px" class="ml-0 pl-3">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-        <span class="hidden-sm-and-down">Sprint IV</span>
+        <span class="hidden-sm-and-down">Administración</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
