@@ -4,12 +4,8 @@ import App from "./App.vue";
 import router from "./router";
 import vuetify from "./plugins/vuetify";
 
-const base = axios.create({
-  baseURL: "http://localhost:3000/"
-});
-
-Vue.prototype.$http = base;
 Vue.config.productionTip = false;
+axios.defaults.baseURL = "http://localhost:3000/api";
 
 new Vue({
   router,

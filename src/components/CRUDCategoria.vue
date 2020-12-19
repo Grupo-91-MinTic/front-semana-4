@@ -3,7 +3,7 @@
     <v-flex>
       <v-data-table
         :headers="headers"
-        :items="desserts"
+        :items="categorias"
         :search="search"
         sort-by="opciones"
         class="elevation-1"
@@ -12,7 +12,7 @@
           <v-toolbar flat>
             <v-toolbar-title>Categoria</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
-            <v-text-filed
+            <v-text-field
               class="text-xs-center"
               v-model="search"
               append-icon="search"
@@ -20,17 +20,11 @@
               single-line
               hide-details
             >
-            </v-text-filed>
+            </v-text-field>
             <v-spacer></v-spacer>
             <v-dialog v-model="dialog" max-width="500px">
-              <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                  color="primary"
-                  dark
-                  class="mb-2"
-                  v-bind="attrs"
-                  v-on="on"
-                >
+              <template v-slot:activator="{ on }">
+                <v-btn color="primary" dark class="mb-2" v-on="on">
                   Nueva categoría
                 </v-btn>
               </template>
@@ -38,58 +32,62 @@
                 <v-card-title>
                   <span class="headline">{{ formTitle }}</span>
                 </v-card-title>
-
                 <v-card-text>
                   <v-container>
                     <v-row>
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="12" md="12">
                         <v-text-field
                           v-model="editedItem.name"
-                          label="Dessert name"
+                          label="Nombre de la categoría"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="6" md="6">
                         <v-text-field
-                          v-model="editedItem.opciones"
-                          label="opciones"
+                          v-model="editedItem.provider"
+                          label="Proveedor"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
+                      <v-col cols="12" sm="6" md="6">
                         <v-text-field
-                          v-model="editedItem.nombre"
-                          label="nombre"
+                          v-model="editedItem.status"
+                          label="Estado"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.descripcion"
-                          label="descripcion"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" md="4">
-                        <v-text-field
-                          v-model="editedItem.estado"
-                          label="estado"
-                        ></v-text-field>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-textarea
+                          v-model="editedItem.description"
+                          color="teal"
+                          :rules="rules"
+                          counter
+                          maxlength="255"
+                          label="Descripcion"
+                          hint="Agregar una descripcion del producto"
+                        >
+                          <template v-slot:label>
+                            <div>Descripcion</div>
+                          </template>
+                        </v-textarea>
                       </v-col>
                     </v-row>
                   </v-container>
                 </v-card-text>
-
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="close">
-                    Cancel
+                    Cancelar
                   </v-btn>
-                  <v-btn color="blue darken-1" text @click="save"> Save </v-btn>
+                  <v-btn color="blue darken-1" text @click="save">
+                    Guardar
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-dialog>
             <v-dialog v-model="dialogDelete" max-width="500px">
               <v-card>
                 <v-card-title class="headline"
-                  >Are you sure you want to delete this item?</v-card-title
-                >
+                  >Esta por eliminar un registro ¿Esta seguro que desea
+                  eliminarlo
+                </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
                   <v-btn color="blue darken-1" text @click="closeDelete"
@@ -104,14 +102,14 @@
             </v-dialog>
           </v-toolbar>
         </template>
-        <template v-slot:item.actions="{ item }">
+        <template v-slot:[`item.actions`]="{ item }">
           <v-icon small class="mr-2" @click="editItem(item)">
             mdi-pencil
           </v-icon>
           <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
         </template>
         <template v-slot:no-data>
-          <v-btn color="primary" @click="initialize"> Reset </v-btn>
+          <v-btn color="primary" @click="listItems"> Recargar </v-btn>
         </template>
       </v-data-table>
     </v-flex>
@@ -119,43 +117,40 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
+    search: "",
     dialog: false,
     dialogDelete: false,
     headers: [
-      {
-        text: "Dessert (100g serving)",
-        align: "start",
-        sortable: false,
-        value: "name",
-      },
-      { text: "Nombre", value: "nombre", sortable: false},
-      { text: "Estado", value: "estado", sortable: false},
-      { text: "Opciones", value: "opciones", sortable: false},
-      { text: "Descripcion", value: "descripcion", sortable: false},
+      { text: "Nombre", value: "nombre", sortable: false },
+      { text: "Estado", value: "estado", sortable: false },
+      { text: "Descripcion", value: "descripcion", sortable: false },
+      { text: "Opciones", value: "opciones", sortable: false },
     ],
-    desserts: [],
+    categorias: [],
     editedIndex: -1,
     editedItem: {
       name: "",
-      opciones: 0,
-      nombre: 0,
-      descripcion: 0,
-      estado: 0,
+      status: 1,
+      provider: "",
+      description: "",
     },
     defaultItem: {
       name: "",
-      opciones: 0,
-      nombre: 0,
-      descripcion: 0,
-      estado: 0,
+      status: 1,
+      provider: "",
+      description: "",
     },
   }),
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Añadir un item" : "Editar item";
+      return this.editedIndex === -1
+        ? "Añadir una nueva categoría"
+        : "Editar categoría";
     },
   },
 
@@ -169,36 +164,48 @@ export default {
   },
 
   created() {
-    this.initialize();
+    this.listItems();
   },
 
   methods: {
-    initialize() {
-      this.desserts = [
-        {
-          name: "Frozen Yogurt",
-          opciones: 159,
-          nombre: 6.0,
-          descripcion: 24,
-          estado: 4.0,
-        },
-      ];
+    listItems() {
+      let categorias = this;
+      let header = { Token: this.$store.state.token };
+      let configuracion = { headers: header };
+      axios
+        .get("categoria/list", configuracion)
+        .then(function (response) {
+          categorias.categorias = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
+    
+    clear() {
+      this.id = "";
+      this.name = "",
+      this.status = 1,
+      this.provider = "",
+      this.description = "",
+      this.editedIndex = -1;
     },
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.categorias.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialog = true;
     },
 
     deleteItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.categorias.indexOf(item);
       this.editedItem = Object.assign({}, item);
       this.dialogDelete = true;
     },
 
     deleteItemConfirm() {
-      this.desserts.splice(this.editedIndex, 1);
+      this.categorias.splice(this.editedIndex, 1);
       this.closeDelete();
     },
 
@@ -220,9 +227,9 @@ export default {
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.categorias[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.categorias.push(this.editedItem);
       }
       this.close();
     },
