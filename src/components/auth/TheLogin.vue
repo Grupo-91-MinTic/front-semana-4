@@ -1,28 +1,51 @@
 <template>
-  <v-layout>
+  <v-layout class="primary">
     <v-flex>
-      <v-row>
-        <v-col>
-          <form>
-            <v-text-field
-              v-model="user"
-              :error-messages="userErrors"
-              :counter="10"
-              label="User"
-              required
-              @input="$v.user.$touch()"
-              @blur="$v.user.$touch()"
-            ></v-text-field>
-            <v-text-field
-              v-model="email"
-              :error-messages="emailErrors"
-              label="E-mail"
-              required
-              @input="$v.email.$touch()"
-              @blur="$v.email.$touch()"
-            ></v-text-field>
-            <v-btn class="mr-4" @click="submit"> submit </v-btn>
-          </form>
+      <v-row align="center" align-content="center">
+        <v-col align-self="center">
+          <a
+            href="https://vuetifyjs.com/en/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="@/assets/logo.svg" class="sideImage" alt="veutify" />
+          </a>
+          <v-card
+            dark
+            color="white"
+            style="max-width: 750px; margin: auto"
+            class="overflow-hidden info pa-12 mt-12 login"
+          >
+            <form>
+              <v-avatar>
+                <img
+                  src="https://img.icons8.com/dusk/64/000000/change-user-male.png"
+                  class="login--avatar"
+                  alt="user"
+                />
+              </v-avatar>
+              <v-card-title class="d-inline-flex">
+                Login: Sprint IV & V
+              </v-card-title>
+              <v-text-field
+                :error-messages="userErrors"
+                @input="$v.user.$touch()"
+                @blur="$v.user.$touch()"
+                v-model="user"
+                label="User"
+                required
+              ></v-text-field>
+              <v-text-field
+                :error-messages="emailErrors"
+                @input="$v.email.$touch()"
+                @blur="$v.email.$touch()"
+                v-model="email"
+                label="E-mail"
+                required
+              ></v-text-field>
+              <v-btn class="mr-4" @click="submit"> submit </v-btn>
+            </form>
+          </v-card>
         </v-col>
       </v-row>
     </v-flex>
@@ -101,4 +124,18 @@ export default {
 };
 </script>
 <style lang="css">
+.sideImage {
+  max-width: 70px;
+  max-height: 70px;
+  display: inline-flex;
+}
+.login {
+  border-radius: 25px;
+}
+.login--avatar {
+  display: inline-block;
+  background: #fff;
+  margin: 15px;
+  border: 50%;
+}
 </style>

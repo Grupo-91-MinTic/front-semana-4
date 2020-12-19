@@ -6,13 +6,13 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    name: 'login',
-    component: () => import("../components/auth/TheLogin.vue"),
-  },
-  {
-    path: "/home",
     name: 'home',
     component: Home,
+  },
+  {
+    path: "/login",
+    name: 'login',
+    component: () => import("../components/auth/TheLogin.vue"),
   },
   {
     path: "/categoria",
