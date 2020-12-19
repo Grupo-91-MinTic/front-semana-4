@@ -3,13 +3,6 @@
     <v-flex>
       <v-row align="center" align-content="center">
         <v-col align-self="center">
-          <a
-            href="https://vuetifyjs.com/en/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src="@/assets/logo.svg" class="sideImage" alt="veutify" />
-          </a>
           <v-card
             dark
             color="white"
@@ -20,27 +13,21 @@
               <v-avatar>
                 <img
                   src="https://img.icons8.com/dusk/64/000000/change-user-male.png"
-                  class="login--avatar"
-                  alt="user"
+                  class="login--avatar d-inline-flex"
+                  alt="password"
                 />
               </v-avatar>
               <v-card-title class="d-inline-flex">
                 Login: Sprint IV & V
               </v-card-title>
               <v-text-field
-                :error-messages="userErrors"
-                @input="$v.user.$touch()"
-                @blur="$v.user.$touch()"
-                v-model="user"
-                label="User"
+                v-model="login.email"
+                label="E-mail"
                 required
               ></v-text-field>
               <v-text-field
-                :error-messages="emailErrors"
-                @input="$v.email.$touch()"
-                @blur="$v.email.$touch()"
-                v-model="email"
-                label="E-mail"
+                v-model="login.password"
+                label="password"
                 required
               ></v-text-field>
               <v-btn class="mr-4" @click="submit"> submit </v-btn>
@@ -57,11 +44,11 @@ import { required, maxLength, email } from "vuelidate/lib/validators";
 import { validationMixin } from "vuelidate";
 import VueJwtDecode from "vue-jwt-decode";
 import swal from "sweetalert";
-export default {
+export default {represented
   mixins: [validationMixin],
 
   validations: {
-    user: { required, maxLength: maxLength(10) },
+    password: { required, maxLength: maxLength(10) },
     email: { required, email },
   },
 
@@ -74,25 +61,8 @@ export default {
       },
     };
   },
-  computed: {
-    userErrors() {
-      const errors = [];
-      if (!this.$v.user.$dirty) return errors;
-      !this.$v.user.maxLength &&
-        errors.push("user must be at most 10 characters long");
-      !this.$v.user.required && errors.push("user is required.");
-      return errors;
-    },
-    emailErrors() {
-      const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Must be valid e-mail");
-      !this.$v.email.required && errors.push("E-mail is required");
-      return errors;
-    },
-  },
   methods: {
-    async loginUser() {
+    async loginpassword() {
       try {
         let response = await this.$http.post("/api/auth/signin", this.login);
         let token = response.data.accessToken;
@@ -117,7 +87,7 @@ export default {
     },
     clear() {
       this.$v.$reset();
-      this.user = "";
+      this.password = "";
       this.email = "";
     },
   },
@@ -134,8 +104,8 @@ export default {
 }
 .login--avatar {
   display: inline-block;
+  border-radius: 50%;
   background: #fff;
   margin: 15px;
-  border: 50%;
 }
 </style>

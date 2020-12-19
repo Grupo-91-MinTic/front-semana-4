@@ -1,47 +1,47 @@
-import Vue from "vue";
-import VueRouter from "vue-router";
-import Home from "../components/Home.vue";
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home.vue';
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: 'home',
+    path: '/home',
+    name: 'Home',
     component: Home,
   },
   {
-    path: "/login",
-    name: 'login',
-    component: () => import("../components/auth/TheLogin.vue"),
+    path: '/',
+    name: 'Login',
+    component: () => import('../components/auth/TheLogin.vue'),
   },
   {
-    path: "/categoria",
-    name: 'categoria',
-    component: () => import("../components/CRUDCategoria.vue")
+    path: '/categoria',
+    name: 'Categoria',
+    component: () => import('../components/CRUDCategoria.vue')
   },
   {
-    path: "/articulo",
-    name: 'articulo',
+    path: '/articulo',
+    name: 'Articulo',
     /** Modificar el CRUD al de articulos */
-    component: () => import("../components/CRUDArticulo.vue")
+    component: () => import('../components/CRUDArticulo.vue')
   },
   {
-    path: "/venta",
+    path: '/venta',
     name: 'venta',
     /** Modificar el CRUD al de ventas */
-    component: () => import("../components/CRUDVenta.vue")
+    component: () => import('../components/CRUDVenta.vue')
   },
   {
-    path: "/cliente",
+    path: '/cliente',
     name: 'cliente',
     /** Modificar el CRUD al de ventas */
-    component: () => import("../components/CRUDCliente.vue")
+    component: () => import('../components/CRUDCliente.vue')
   },
   {
-    path: "/user",
+    path: '/user',
     name: 'user',
     /** Modificar el CRUD al de ventas */
-    component: () => import("../components/CRUDUser.vue")
+    component: () => import('../components/CRUDUser.vue')
   },
 ];
 
