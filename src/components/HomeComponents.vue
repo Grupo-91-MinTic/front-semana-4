@@ -1,10 +1,13 @@
 <template>
   <div>
-    <h1>Nada por ahora</h1>
+    <h2>Estas en home</h2>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  
+}
 </script>
 <style lang="css">
+  
 </style>

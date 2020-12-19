@@ -17,15 +17,12 @@
         ><span>Sing out</span></router-link
       >
     </nav>
-    <home></home>
   </div>
 </template>
 <script>
-import Home from "../components/Home.vue";
 export default {
   name: "Home",
   components: {
-    Home,
   },
 };
 </script>

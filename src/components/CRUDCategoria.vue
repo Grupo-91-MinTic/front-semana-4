@@ -169,7 +169,7 @@ export default {
 
   methods: {
     listItems() {
-      let categorias = this;
+      let categorias = this.categorias;
       let header = { Token: this.$store.state.token };
       let configuracion = { headers: header };
       axios
@@ -182,13 +182,12 @@ export default {
         });
     },
 
-    
     clear() {
       this.id = "";
-      this.name = "",
-      this.status = 1,
-      this.provider = "",
-      this.description = "",
+      this.name = "";
+      this.status = 1;
+      this.provider = "";
+      this.description = "";
       this.editedIndex = -1;
     },
 
