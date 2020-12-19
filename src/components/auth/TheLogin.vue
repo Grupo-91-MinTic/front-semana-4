@@ -1,56 +1,72 @@
 <template>
-  <div>
-    <div id="login" class="card mt-3 pt-3" style="width: 100%">
-      <h1 class="bg-success text-center p-2">Sprint III</h1>
-      <form class="row justify-content-center" @submit.prevent="loginUser">
-        <div class="form-group row p-5 m-5">
-          <label for="email" class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <input
-              type="text"
-              class="form-control border-success"
-              id="email"
-              placeholder="Email"
-              v-model="login.email"
-            />
-          </div>
-          <label for="inputPassword" class="col-sm-2 col-form-label"
-            >Password</label
-          >
-          <div class="col-sm-10">
-            <input
-              class="form-control border-success"
-              placeholder="Password"
-              id="inputPassword"
-              type="password"
-              v-model="login.password"
-            />
-          </div>
-        </div>
-        <button
-          class="btn btn-success btn-block w-75 my-4"
-          @click.prevent="loginUser"
-          type="submit"
-        >
-          Sign in
-        </button>
-      </form>
-    </div>
-  </div>
+  <v-layout>
+    <v-flex>
+      <v-row>
+        <v-col>
+          <form>
+            <v-text-field
+              v-model="user"
+              :error-messages="userErrors"
+              :counter="10"
+              label="User"
+              required
+              @input="$v.user.$touch()"
+              @blur="$v.user.$touch()"
+            ></v-text-field>
+            <v-text-field
+              v-model="email"
+              :error-messages="emailErrors"
+              label="E-mail"
+              required
+              @input="$v.email.$touch()"
+              @blur="$v.email.$touch()"
+            ></v-text-field>
+            <v-btn class="mr-4" @click="submit"> submit </v-btn>
+          </form>
+        </v-col>
+      </v-row>
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
+import { required, maxLength, email } from "vuelidate/lib/validators";
+import { validationMixin } from "vuelidate";
 import VueJwtDecode from "vue-jwt-decode";
 import swal from "sweetalert";
 export default {
+  mixins: [validationMixin],
+
+  validations: {
+    user: { required, maxLength: maxLength(10) },
+    email: { required, email },
+  },
+
   data() {
     return {
       login: {
-        user: {},
+        user: "",
         email: "",
         password: "",
       },
     };
+  },
+  computed: {
+    userErrors() {
+      const errors = [];
+      if (!this.$v.user.$dirty) return errors;
+      !this.$v.user.maxLength &&
+        errors.push("user must be at most 10 characters long");
+      !this.$v.user.required && errors.push("user is required.");
+      return errors;
+    },
+    emailErrors() {
+      const errors = [];
+      if (!this.$v.email.$dirty) return errors;
+      !this.$v.email.email && errors.push("Must be valid e-mail");
+      !this.$v.email.required && errors.push("E-mail is required");
+      return errors;
+    },
   },
   methods: {
     async loginUser() {
@@ -60,27 +76,29 @@ export default {
         localStorage.setItem("jwt", token);
 
         let decoded = VueJwtDecode.decode(token);
-        console.log("holadecode", decoded);
+        console.log(decoded);
 
         if (token) {
           let token = localStorage.getItem("jwt");
           let decoded = VueJwtDecode.decode(token);
 
-          swal("Exitoso", "Bienvenido " + decoded.name, "success");
+          swal("Exitoso", "Bienvenido " + decoded.user, "success");
           this.$router.push("/home");
         }
       } catch (error) {
         swal("Error", "Este registro no existe", "error");
       }
     },
+    submit() {
+      this.$v.$touch();
+    },
+    clear() {
+      this.$v.$reset();
+      this.user = "";
+      this.email = "";
+    },
   },
 };
 </script>
 <style lang="css">
-#login {
-  color: #fff;
-}
-.card {
-  background: #2c3e50;
-}
 </style>
