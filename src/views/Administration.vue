@@ -1,8 +1,9 @@
 <template>
-  <navigator-bar></navigator-bar>
-  <app-bar></app-bar>
-  <main-content></main-content>
-  <footer-section></footer-section>
+  <div>
+    <navigator-bar></navigator-bar>
+    <main-content></main-content>
+    <footer-section></footer-section>
+  </div>
 </template>
 <script>
 import AppBar from "../components/AppBar.vue";
