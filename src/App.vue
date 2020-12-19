@@ -11,8 +11,7 @@ import AppBar from "./components/AppBar.vue";
 import MainContent from "./components/MainContent.vue";
 import FooterSection from "./components/FooterSection.vue";
 export default {
-  name: "App",
-
+  name: "App", 
   components: {
     AppBar,
     MainContent,
