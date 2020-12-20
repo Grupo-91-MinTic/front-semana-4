@@ -7,7 +7,7 @@
     >
       <v-list dense>
         <template>
-          <v-list-item :to="{ name: 'home' }">
+          <v-list-item :to="{ name: 'LayoutHome' }">
             <v-list-item-action>
               <v-icon>home</v-icon>
             </v-list-item-action>
@@ -18,23 +18,15 @@
           <v-list-group>
             <v-list-item slot="activator">
               <v-list-item-content>
-                <v-list-item-title> Almacen </v-list-item-title>
+                <v-list-item-title> Productos </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'categoria' }">
-              <v-list-item-action>
-                <v-icon>mdi-view-dashboard</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title> Categorias </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :Administraciónto="{ name: 'articulo' }">
+            <v-list-item :to="{ name: 'LayoutProduct' }">
               <v-list-item-action>
                 <v-icon>mdi-clipboard-edit</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title> Articulos </v-list-item-title>
+                <v-list-item-title> Productos </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-group>
@@ -43,23 +35,15 @@
           <v-list-group>
             <v-list-item slot="activator">
               <v-list-item-content>
-                <v-list-item-title> Ventas </v-list-item-title>
+                <v-list-item-title> Información </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'venta' }">
-              <v-list-item-action>
-                <v-icon>mdi-piggy-bank</v-icon>
-              </v-list-item-action>
-              <v-list-item-content>
-                <v-list-item-title> Ventas </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: 'cliente' }">
+            <v-list-item :to="{ name: 'LayoutCreator' }">
               <v-list-item-action>
                 <v-icon>mdi-account-group</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title> Clientes </v-list-item-title>
+                <v-list-item-title> Creadores </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list-group> </template

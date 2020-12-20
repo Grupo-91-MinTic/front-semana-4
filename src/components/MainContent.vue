@@ -14,6 +14,7 @@
 <script>
 import AdministrationFooter from "./AdministrationFooter.vue";
 export default {
+  name: "MainContent",
   components: { AdministrationFooter },
 };
 </script>

@@ -14,7 +14,9 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  name: "AdministrationFooter",
+};
 </script>
 <style lang="css">
 .footer {

@@ -1,12 +1,11 @@
 <template>
     <div>
-        <h2>Clientes</h2>
+        <h2>Creadores</h2>
     </div>
 </template>
 <script>
 export default {
-    name: "cliente",
-    
+    name: "LayoutCreator",
 }
 </script>
 <style lang="css">

@@ -7,7 +7,7 @@
     >
       <v-list dense>
         <template>
-          <v-list-item :to="{ name: 'home' }">
+          <v-list-item :to="{ name: 'Home' }">
             <v-list-item-action>
               <v-icon>home</v-icon>
             </v-list-item-action>
@@ -21,7 +21,7 @@
                 <v-list-item-title> Almacen </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'categoria' }">
+            <v-list-item :to="{ name: 'Category' }">
               <v-list-item-action>
                 <v-icon>mdi-view-dashboard</v-icon>
               </v-list-item-action>
@@ -29,7 +29,7 @@
                 <v-list-item-title> Categorias </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'articulo' }">
+            <v-list-item :to="{ name: 'Product' }">
               <v-list-item-action>
                 <v-icon>mdi-clipboard-edit</v-icon>
               </v-list-item-action>
@@ -46,7 +46,7 @@
                 <v-list-item-title> Ventas </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'venta' }">
+            <v-list-item :to="{ name: 'Sell' }">
               <v-list-item-action>
                 <v-icon>mdi-piggy-bank</v-icon>
               </v-list-item-action>
@@ -54,7 +54,7 @@
                 <v-list-item-title> Ventas </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'cliente' }">
+            <v-list-item :to="{ name: 'Client' }">
               <v-list-item-action>
                 <v-icon>mdi-account-group</v-icon>
               </v-list-item-action>
@@ -70,7 +70,7 @@
                 <v-list-item-title> Accesos </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-            <v-list-item :to="{ name: 'user' }">
+            <v-list-item :to="{ name: 'User' }">
               <v-list-item-action>
                 <v-icon>mdi-account</v-icon>
               </v-list-item-action>
@@ -93,7 +93,7 @@
         <span class="hidden-sm-and-down">Administración</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon>
+      <v-btn @click="logOut" icon>
         <v-icon>logout</v-icon>
       </v-btn>
     </v-app-bar>
@@ -101,10 +101,17 @@
 </template>
 <script>
 export default {
+  name: "AppBar",
   data() {
     return {
       drawer: true,
     };
+  },
+  methods: {
+    logOut() {
+      localStorage.removeItem("jwt");
+      this.$router.push("/");
+    },
   },
 };
 </script>
