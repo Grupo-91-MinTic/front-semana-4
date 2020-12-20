@@ -37,7 +37,7 @@ export default new Vuex.Store({
             commit("setUser", null);
             commit("setToken", null);
             localStorage.removeItem("token");
-            router.push({ path: '/' });
+            router.push({ path: '/principal' });
         }
     },
     modules: {}
