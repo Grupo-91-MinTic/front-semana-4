@@ -42,8 +42,8 @@
 </template>
 
 <script>
-import VueJwtDecode from "vue-jwt-decode";
-import swal from "sweetalert";
+import VueJwtDecode from 'vue-jwt-decode'
+import swal from 'sweetalert';
 export default {
   name: "TheLogin",
   data() {
@@ -58,19 +58,18 @@ export default {
   methods: {
     async loginUser() {
       try {
-        let response = await this.$http.post("/api/auth/signin", this.login);
-        let token = response.data.accessToken;
-        localStorage.setItem("jwt", token);
-
-        let decoded = VueJwtDecode.decode(token);
-        console.log("Decoded token", decoded);
+        let response = await this.$http.post('/api/usuario/login', this.login);
+        let token = response.data.tokenReturn;
+        localStorage.setItem('jwt', token);
+        console.log(token);
 
         if (token) {
           let token = localStorage.getItem("jwt");
           let decoded = VueJwtDecode.decode(token);
+          console.log(decoded);
 
-          swal("Exitoso", "Bienvenido " + decoded.name, "success");
-          this.$router.push("/home");
+          swal('Exitoso', 'Bienvenido ' + decoded.id.nombre, 'success');
+          this.$router.push('/administration');
         }
       } catch (error) {
         swal("Error", "Este registro no existe", "error");
