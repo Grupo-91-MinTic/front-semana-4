@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
     meta: {
@@ -22,30 +22,34 @@ const routes = [
       public: true
     }
   },
-
   {
-    path: '/administration',
+    path: '/',
     name: 'Administration',
     component: () => import('../views/Administration.vue'),
     meta: {
-      auth: false
+      public: true
+      //auth: false
     }
   },
   {
     path: '/categoria',
-    name: 'Categoria',
+    name: 'categoria',
     component: () => import('../components/CRUDCategoria.vue'),
     meta: {
-      auth: false
+      
+      public: true
+      //auth: false
     }
   },
   {
     path: '/articulo',
-    name: 'Articulo',
+    name: 'articulo',
     /** Modificar el CRUD al de articulos */
     component: () => import('../components/CRUDArticulo.vue'),
     meta: {
-      auth: false
+      
+      public: true
+      //auth: false
     }
   },
   {
@@ -54,7 +58,9 @@ const routes = [
     /** Modificar el CRUD al de ventas */
     component: () => import('../components/CRUDVenta.vue'),
     meta: {
-      auth: false
+      
+      public: true
+      //auth: false
     }
   },
   {
@@ -63,7 +69,9 @@ const routes = [
     /** Modificar el CRUD al de ventas */
     component: () => import('../components/CRUDCliente.vue'),
     meta: {
-      auth: false
+      
+      public: true
+      //auth: false
     }
   },
   {
@@ -72,7 +80,9 @@ const routes = [
     /** Modificar el CRUD al de ventas */
     component: () => import('../components/CRUDUser.vue'),
     meta: {
-      auth: false
+      
+      public: true
+      //auth: false
     }
   },
 ];

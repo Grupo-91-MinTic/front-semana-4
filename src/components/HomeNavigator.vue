@@ -101,6 +101,7 @@
 </template>
 <script>
 export default {
+  name: "HomeNavigator",
   data() {
     return {
       drawer: false,
