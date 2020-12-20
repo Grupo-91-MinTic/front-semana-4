@@ -7,7 +7,7 @@
     >
       <v-list dense>
         <template>
-          <v-list-item :to="{ name: 'LayoutHome' }">
+          <v-list-item :to="{ name: 'LayoutMain' }">
             <v-list-item-action>
               <v-icon>home</v-icon>
             </v-list-item-action>
@@ -35,6 +35,23 @@
           <v-list-group>
             <v-list-item slot="activator">
               <v-list-item-content>
+                <v-list-item-title> Testimonios </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <v-list-item :to="{ name: 'LayoutTestimony' }">
+              <v-list-item-action>
+                <v-icon>mdi-account-heart</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title> Nuestros clientes </v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list-group>
+        </template>
+        <template>
+          <v-list-group>
+            <v-list-item slot="activator">
+              <v-list-item-content>
                 <v-list-item-title> Información </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
@@ -46,23 +63,15 @@
                 <v-list-item-title> Creadores </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-          </v-list-group> </template
-        ><template>
-          <v-list-group>
-            <v-list-item slot="activator">
-              <v-list-item-content>
-                <v-list-item-title> Accesos </v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-            <v-list-item :to="{ name: 'user' }">
+            <v-list-item :to="{ name: 'LayoutInfo' }">
               <v-list-item-action>
-                <v-icon>mdi-account</v-icon>
+                <v-icon>mdi-book-information-variant</v-icon>
               </v-list-item-action>
               <v-list-item-content>
-                <v-list-item-title> Usuario </v-list-item-title>
+                <v-list-item-title> Contenidos </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-          </v-list-group>
+          </v-list-group> 
         </template>
       </v-list>
     </v-navigation-drawer>

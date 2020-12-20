@@ -16,8 +16,8 @@ const routes = [
     children: [
       {
         path: '/principal',
-        name: 'LayoutHome',
-        component: () => import('../components/LayoutHome.vue'),
+        name: 'LayoutMain',
+        component: () => import('../components/LayoutMain.vue'),
         meta: {
           public: true
         }
@@ -31,9 +31,25 @@ const routes = [
         }
       },
       {
+        path: '/testimonios',
+        name: 'LayoutTestimony',
+        component: () => import('../components/LayoutTestimony.vue'),
+        meta: {
+          public: true
+        }
+      },
+      {
         path: '/creadores',
         name: 'LayoutCreator',
         component: () => import('../components/LayoutCreator.vue'),
+        meta: {
+          public: true
+        }
+      },
+      {
+        path: '/informacion',
+        name: 'LayoutInfo',
+        component: () => import('../components/LayoutInfo.vue'),
         meta: {
           public: true
         }
@@ -57,6 +73,15 @@ const routes = [
       //auth: false
     },
     children: [
+      {
+        path: '/home',
+        name: 'AdministrationMainContent',
+        component: () => import('../components/AdministrationMainContent.vue'),
+        meta: {
+          public: true
+          //auth: false
+        }
+      },
       {
         path: '/categoria',
         name: 'Category',

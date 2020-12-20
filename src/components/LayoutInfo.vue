@@ -1,12 +1,13 @@
 <template>
-  <div>
-    <h2>Productos</h2>
-  </div>
+    <div>
+        <h2>Info</h2>
+    </div>
 </template>
 <script>
 export default {
-  name: "LayoutProduct",
-};
+    name: "LayoutInfo",
+}
 </script>
 <style lang="css">
+    
 </style>
