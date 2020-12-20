@@ -20,12 +20,9 @@
               <v-card-title class="d-inline-flex">
                 Acceso al sistema
               </v-card-title>
+              <v-text-field v-model="email" label="Usuario"></v-text-field>
               <v-text-field
-                v-model="login.email"
-                label="Usuario"
-              ></v-text-field>
-              <v-text-field
-                v-model="login.password"
+                v-model="password"
                 label="Contraseña"
                 type="password"
               ></v-text-field>
@@ -42,25 +39,55 @@
 </template>
 
 <script>
-import VueJwtDecode from 'vue-jwt-decode'
-import swal from 'sweetalert';
+import swal from "sweetalert";
+import axios from "axios";
 export default {
   name: "TheLogin",
   data() {
     return {
-      login: {
-        user: "",
-        email: "",
-        password: "",
-      },
+      user: "",
+      email: "",
+      password: "",
+      currentError: null,
     };
   },
   methods: {
+    loginUser() {
+      axios
+        .post("/usuario/login", {
+          email: this.email,
+          password: this.password,
+        })
+        .then((response) => {
+          return response.data;
+        })
+        .then((data) => {
+          this.$store.dispatch("keepToken", data.tokenReturn);
+          swal("Exitoso", "Bienvenido " + this.$store.state.user.nombre, "success");
+
+          this.$router.push({ name: "AdministrationMainContent" });
+        })
+        .catch((error) => {
+          this.currentError = null;
+          if (error.response.status == 401) {
+            this.currentError = "Credenciales son incorrectas.";
+          } else if (error.response.status == 404) {
+            this.currentError = "El usuario no existe";
+          } else {
+            this.currentError = "Ocurrió un error con el servidor.";
+          }
+          swal("Error", this.currentError, "error");
+        });
+    },
+    cancelLogin() {
+      this.$store.dispatch("close");
+    },
+    /**
     async loginUser() {
       try {
-        let response = await this.$http.post('/api/usuario/login', this.login);
+        let response = await this.$http.post("/usuario/login", this.login);
         let token = response.data.tokenReturn;
-        localStorage.setItem('jwt', token);
+        localStorage.setItem("jwt", token);
         console.log(token);
 
         if (token) {
@@ -68,17 +95,18 @@ export default {
           let decoded = VueJwtDecode.decode(token);
           console.log(decoded);
 
-          swal('Exitoso', 'Bienvenido ' + decoded.id.nombre, 'success');
-          this.$router.push('/administration');
+          swal("Exitoso", "Bienvenido " + decoded.nombre, "success");
+          this.$router.push("/home");
         }
       } catch (error) {
         swal("Error", "Este registro no existe", "error");
       }
     },
-    cancelLogin(){
+    cancelLogin() {
       localStorage.removeItem("jwt");
       this.$router.push("/");
-    }
+    },
+    */
   },
 };
 </script>

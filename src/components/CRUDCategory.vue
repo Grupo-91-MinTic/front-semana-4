@@ -10,7 +10,7 @@
       >
         <template v-slot:top>
           <v-toolbar flat>
-            <v-toolbar-title>Categoria</v-toolbar-title>
+            <v-toolbar-title>Categorias</v-toolbar-title>
             <v-divider class="mx-4" inset vertical></v-divider>
             <v-text-field
               class="text-xs-center"
@@ -57,7 +57,6 @@
                         <v-textarea
                           v-model="editedItem.description"
                           color="teal"
-                          :rules="rules"
                           counter
                           maxlength="255"
                           label="Descripcion"
@@ -86,7 +85,7 @@
               <v-card>
                 <v-card-title class="headline"
                   >Esta por eliminar un registro ¿Esta seguro que desea
-                  eliminarlo
+                  eliminarlo?
                 </v-card-title>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -94,7 +93,7 @@
                     >Cancel</v-btn
                   >
                   <v-btn color="blue darken-1" text @click="deleteItemConfirm"
-                    >OK</v-btn
+                    >Guardar</v-btn
                   >
                   <v-spacer></v-spacer>
                 </v-card-actions>
@@ -117,7 +116,8 @@
 </template>
 
 <script>
-import axios from "axios";
+//import VueJwtDecode from "VueJwtDecode";
+//import axios from "axios";
 
 export default {
   name: "Category",
@@ -169,18 +169,36 @@ export default {
   },
 
   methods: {
-    listItems() {
+    async listItems() {
+      try {
+        let response = await this.$http.get("/categoria/list", this.headers);
+        let token = response.data.tokenReturn;
+        localStorage.setItem("category", token);
+        console.log(token);
+
+        if (token) {
+          let token = localStorage.getItem("category");
+          this.categorias = token;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+      /** 
       let categorias = this.categorias;
       let header = { Token: this.$store.state.token };
+      console.log(this.$store.state.token);
       let configuracion = { headers: header };
+      console.log(header);
+      console.log(configuracion);
       axios
-        .get("categoria/list", configuracion)
+        .get("/categoria/list", configuracion)
         .then(function (response) {
           categorias.categorias = response.data;
         })
         .catch(function (error) {
           console.log(error);
         });
+        */
     },
 
     clear() {
