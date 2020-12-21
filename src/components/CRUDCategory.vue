@@ -27,7 +27,7 @@
                                     <v-text-field v-model="nombre" label="Nombre"></v-text-field>
                                 </v-flex>
                                 <v-flex xs12 sm12 md12>
-                                    <v-textarea v-model="descripcion" color="teal" counter maxlength="255" label="Descripcion" hint="Agregar una descripcion del producto">
+                                    <v-textarea v-model="descripcion" color="teal" counter maxlength="255" label="Descripcion" hint="Agregar una descripcion de la categoría">
                                     </v-textarea>
                                 </v-flex>
                                 <v-flex xs12 sm12 md12 v-show="valida">
@@ -71,25 +71,6 @@
                         </v-card-actions>
                     </v-card>
                 </v-dialog>
-                <v-dialog v-model="dialogDelete" max-width="290px">
-                    <v-card>
-                        <v-card-title class="headline">
-                            Eliminar Item
-                        </v-card-title>
-                        <v-card-text>
-                            Estás a punto de eliminar el item {{nombre}}
-                        </v-card-text>
-                        <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn color="blue darken-1" text @click="close"
-                                >Cancelar
-                            </v-btn>
-                            <v-btn color="blue darken-1" text @click="eliminar"
-                                >Eliminar
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-dialog>
             </v-toolbar>
             <v-data-table
                 :headers="headers"
@@ -117,13 +98,6 @@
                 @click="activarDesactivarMostrar(1,item)"
                 >
                 check
-                </v-icon>
-                <v-icon 
-                    small 
-                    class="mr-2" 
-                    @click="deleteItem(item)"
-                    > 
-                    mdi-delete 
                 </v-icon>
             </template>
             <template v-slot:[`item.estado`]="{ item }">
@@ -162,7 +136,6 @@
                 valida:0,
                 validaMensaje:[],
                 adModal:0,
-                dialogDelete:0,
                 adAccion:0,
                 adNombre:'',
                 adId:''
@@ -200,7 +173,6 @@
                 this.validaMensaje=[];
                 this.editedIndex=-1;
                 this.dialog = false;
-                this.dialogDelete = false;
             },
             validar(){
                 this.valida=0;
@@ -209,7 +181,7 @@
                     this.validaMensaje.push('El nombre de la categoría debe tener entre 1-50 caracteres.');
                 }
                 if(this.descripcion.length<1){
-                    this.validaMensaje.push('La descripción de la categoría no debe tener más de 255 caracteres.');
+                    this.validaMensaje.push('La descripción de la categoría no debe ser nula.');
                 }
                 if (this.validaMensaje.length){
                     this.valida=1;
@@ -249,35 +221,12 @@
                     });
                 }
             },
-            
-            eliminar(){
-                let me=this;
-                let header={"Token" : this.$store.state.token};
-                let configuracion= {headers : header};
-                axios.delete('categoria/remove', {'id':this.id },configuracion)
-                .then(function(response){
-                    me.limpiar();
-                    me.close();
-                    me.listar();
-                    console.log(response.data);
-                })
-                .catch(function(error){
-                    console.log(error);
-                });
-            },
-
             editItem (item) {
                 this.id=item.id;
                 this.nombre=item.nombre;
                 this.descripcion=item.descripcion;
                 this.dialog = true;
                 this.editedIndex=1;
-            },
-            deleteItem (item) {
-                this.id=item.id;
-                this.nombre=item.nombre;
-                this.descripcion=item.descripcion;
-                this.dialogDelete = true;
             },
             activarDesactivarMostrar(accion,item){
                 this.adModal=1;
