@@ -112,6 +112,17 @@
                 check
                 </v-icon>
             </template>
+            <template v-slot:[`item.nombre`]="{ item }">
+                <div v-if="item.urlImage">
+                  <v-avatar>
+                    <img
+                      :src='item.urlImage'
+                      :alt='item.nombre'
+                    >
+                  </v-avatar>
+                </div>
+                  <span>  {{item.nombre}}</span>
+            </template>
             <template v-slot:[`item.estado`]="{ item }">
                  <div v-if="item.estado">
                         <span class="blue--text">Activo</span>
