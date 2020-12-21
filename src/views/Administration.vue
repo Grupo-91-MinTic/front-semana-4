@@ -8,7 +8,7 @@
 <script>
 import AppBar from "../components/AppBar.vue";
 import MainContent from "../components/MainContent.vue";
-import AdministrationFooter from "../components/AdministrationFooter.vue";
+import AdministrationFooter from '../components/AdministrationFooter.vue';
 export default {
   name: "Administration",
   components: {

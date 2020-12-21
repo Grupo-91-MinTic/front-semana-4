@@ -109,8 +109,8 @@ export default {
   },
   methods: {
     logOut() {
-      this.$store.dispatch("close");
-      this.$router.push({ path: "principal" });
+      localStorage.removeItem("jwt");
+      this.$router.push("/");
     },
   },
 };

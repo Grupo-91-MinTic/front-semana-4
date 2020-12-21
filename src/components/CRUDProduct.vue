@@ -1,436 +1,247 @@
 <template>
-  <v-layout align-start>
+  <v-layout aling-start>
     <v-flex>
-      <v-toolbar text color="white">
-        <v-toolbar-title>Productos</v-toolbar-title>
-        <v-divider class="mx-2" inset vertical></v-divider>
-        <v-spacer></v-spacer>
-        <v-text-field
-          class="text-xs-center"
-          v-model="search"
-          append-icon="search"
-          label="Búsqueda"
-          single-line
-          hide-details
-        ></v-text-field>
-        <v-spacer></v-spacer>
-        <v-dialog v-model="dialog" max-width="500px">
-          <template v-slot:activator="{ on }">
-            <v-btn color="primary" dark class="mb-2" v-on="on"
-              >Nuevo Producto</v-btn
-            >
-          </template>
-          <v-card>
-            <v-card-title>
-              <span class="headline">{{ formTitle }}</span>
-            </v-card-title>
-            <v-card-text>
-              <v-container grid-list-md>
-                <v-layout wrap>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="codigo"
-                      label="Codigo"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="nombre"
-                      label="Nombre"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-select
-                      v-model="selectCategoria"
-                      :items="nombresCategorias"
-                      label="Categoría"
-                    ></v-select>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-textarea
-                      v-model="descripcion"
-                      color="teal"
-                      counter
-                      maxlength="255"
-                      label="Descripcion"
-                      hint="Agregar una descripcion del producto"
-                    >
-                    </v-textarea>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-textarea
-                      v-model="caracteristicas"
-                      color="teal"
-                      counter
-                      maxlength="255"
-                      label="Características"
-                      hint="Agregar las características del producto"
-                    >
-                    </v-textarea>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12>
-                    <v-text-field
-                      v-model="urlImage"
-                      label="url Imagen"
-                    ></v-text-field>
-                  </v-flex>
-                  <v-flex xs12 sm12 md12 v-show="valida">
-                    <div
-                      class="red--text"
-                      v-for="v in validaMensaje"
-                      :key="v"
-                      v-text="v"
-                    ></div>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="close">Cancelar</v-btn>
-              <v-btn color="blue darken-1" text @click="guardar">Guardar</v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-        <v-dialog v-model="adModal" max-width="290">
-          <v-card>
-            <v-card-title class="headline" v-if="adAccion == 1">
-              Activar Item
-            </v-card-title>
-            <v-card-title class="headline" v-if="adAccion == 2">
-              Desactivar Item
-            </v-card-title>
-            <v-card-text>
-              Estás a punto de <span v-if="adAccion == 1">activar </span>
-              <span v-if="adAccion == 2">desactivar </span> el item
-              {{ adNombre }}
-            </v-card-text>
-            <v-card-actions>
-              <v-spacer></v-spacer>
-              <v-btn
-                text
-                @click="activarDesactivarCerrar()"
-                color="green darken-1"
-              >
-                Cancelar
-              </v-btn>
-              <v-btn
-                v-if="adAccion == 1"
-                text
-                @click="activar()"
-                color="orange darken-4"
-              >
-                Activar
-              </v-btn>
-              <v-btn
-                v-if="adAccion == 2"
-                text
-                @click="desactivar()"
-                color="orange darken-4"
-              >
-                Desactivar
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
-      </v-toolbar>
       <v-data-table
         :headers="headers"
-        :items="productos"
+        :items="articulos"
         :search="search"
+        sort-by="opciones"
         class="elevation-1"
       >
-        <template v-slot:[`item.opciones`]="{ item }">
-          <v-icon small class="mr-2" @click="editItem(item)"> edit </v-icon>
-          <v-icon
-            v-if="item.estado"
-            small
-            @click="activarDesactivarMostrar(2, item)"
-          >
-            block
-          </v-icon>
-
-          <v-icon v-else small @click="activarDesactivarMostrar(1, item)">
-            check
-          </v-icon>
+        <template v-slot:top>
+          <v-toolbar flat>
+            <v-toolbar-title>Articulos</v-toolbar-title>
+            <v-divider class="mx-4" inset vertical></v-divider>
+            <v-text-field
+              class="text-xs-center"
+              v-model="search"
+              append-icon="search"
+              label="Búsqueda"
+              single-line
+              hide-details
+            >
+            </v-text-field>
+            <v-spacer></v-spacer>
+            <v-dialog v-model="dialog" max-width="500px">
+              <template v-slot:activator="{ on }">
+                <v-btn color="primary" dark class="mb-2" v-on="on">
+                  Nuevo articulo
+                </v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">{{ formTitle }}</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-text-field
+                          v-model="editedItem.name"
+                          label="Nombre del articulo"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.price"
+                          label="Precio"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.category"
+                          label="Categoria"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="6" md="4">
+                        <v-text-field
+                          v-model="editedItem.status"
+                          label="Estado"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" sm="12" md="12">
+                        <v-textarea
+                          v-model="editedItem.description"
+                          color="teal"
+                          :rules="rules"
+                          counter
+                          maxlength="255"
+                          label="Descripcion"
+                          hint="Agregar una descripcion del producto"
+                        >
+                          <template v-slot:label>
+                            <div>Descripcion</div>
+                          </template>
+                        </v-textarea>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-card-text>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="close">
+                    Cancelar
+                  </v-btn>
+                  <v-btn color="blue darken-1" text @click="save">
+                    Guardar
+                  </v-btn>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+            <v-dialog v-model="dialogDelete" max-width="500px">
+              <v-card>
+                <v-card-title class="headline"
+                  >Esta por eliminar un registro ¿Esta seguro que desea
+                  eliminarlo?
+                </v-card-title>
+                <v-card-actions>
+                  <v-spacer></v-spacer>
+                  <v-btn color="blue darken-1" text @click="closeDelete"
+                    >Cancel</v-btn
+                  >
+                  <v-btn color="blue darken-1" text @click="deleteItemConfirm"
+                    >OK</v-btn
+                  >
+                  <v-spacer></v-spacer>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-toolbar>
         </template>
-        <template v-slot:[`item.nombre`]="{ item }">
-          <div v-if="item.urlImage">
-            <v-avatar>
-              <img :src="item.urlImage" :alt="item.nombre" />
-            </v-avatar>
-          </div>
-          <span> {{ item.nombre }}</span>
-        </template>
-        <template v-slot:[`item.estado`]="{ item }">
-          <div v-if="item.estado">
-            <span class="blue--text">Activo</span>
-          </div>
-          <div v-else>
-            <span class="red--text">Inactivo</span>
-          </div>
+        <template v-slot:[`item.actions`]="{ item }"
+          >precio
+          <v-icon small class="mr-2" @click="editItem(item)">
+            mdi-pencil
+          </v-icon>
+          <v-icon small @click="deleteItem(item)"> mdi-delete </v-icon>
         </template>
         <template v-slot:no-data>
-          <v-btn color="primary" @click="listar()">Resetear</v-btn>
+          <v-btn color="primary" @click="listItems"> Recargar </v-btn>
         </template>
       </v-data-table>
     </v-flex>
   </v-layout>
 </template>
+
 <script>
 import axios from "axios";
+
 export default {
-  data() {
-    return {
-      dialog: false,
-      search: "",
-      nombresCategorias: [],
-      idCategorias: [],
-      productos: [],
-      headers: [
-        { text: "Nombre", value: "nombre", sortable: false },
-        { text: "Descripción", value: "descripcion", sortable: false },
-        { text: "Características", value: "caracteristicas", sortable: false },
-        { text: "Imagen", value: "urlImage", sortable: false },
-        { text: "Estado", value: "estado", sortable: false },
-        { text: "Opciones", value: "opciones", sortable: false },
-      ],
-      editedIndex: -1,
-      id: "",
-      codigo: "",
-      nombre: "",
-      selectCategoria: "",
-      descripcion: "",
-      caracteristicas: "",
-      urlImage: "",
-      valida: 0,
-      validaMensaje: [],
-      adModal: 0,
-      adAccion: 0,
-      adNombre: "",
-      adId: "",
-      adCodigo: "",
-    };
-  },
+  name: "Product",
+  data: () => ({
+    search: "",
+    dialog: false,
+    dialogDelete: false,
+    headers: [
+      { text: "Nombre", value: "nombre", sortable: false },
+      { text: "Precio", value: "precio", sortable: false },
+      { text: "Categoria", value: "categoria", sortable: false },
+      { text: "Estado", value: "estado", sortable: false },
+      { text: "Descripcion", value: "descripcion", sortable: false },
+      { text: "Opciones", value: "opciones", sortable: false },
+    ],
+    products: [],
+    editedIndex: -1,
+    editedItem: {
+      name: "",
+      price: "",
+      status: 1,
+      category: "",
+      description: "",
+    },
+    defaultItem: {
+      name: "",
+      status: 1,
+      provider: "",
+      description: "",
+    },
+  }),
+
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? "Nuevo registro" : "Editar registro";
+      return this.editedIndex === -1
+        ? "Añadir un nuevo articulo"
+        : "Editar un articulo";
     },
   },
+
   watch: {
     dialog(val) {
       val || this.close();
     },
+    dialogDelete(val) {
+      val || this.closeDelete();
+    },
   },
-  created() {
-    this.listar();
-    this.listarCategorias();
-  },
-  methods: {
-    listarCategorias() {
-      let me = this;
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
-      axios
-        .get("categoria/list", configuracion)
-        .then(function (response) {
-          for (var i = 0; i < response.data.length; i++) {
-            me.nombresCategorias.push(response.data[i].nombre);
-            me.idCategorias.push(response.data[i].id);
-          }
-          console.log(me.idCategorias);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    listar() {
-      let me = this;
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
-      axios
-        .get("articulo/list", configuracion)
-        .then(function (response) {
-          me.productos = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    limpiar() {
-      this.id = "";
-      this.codigo = "";
-      this.nombre = "";
-      this.descripcion = "";
-      this.caracteristicas = "";
-      this.urlImage = "";
-      this.valida = 0;
-      this.validaMensaje = [];
-      this.editedIndex = -1;
-      this.dialog = false;
-    },
-    validar() {
-      this.valida = 0;
-      this.validaMensaje = [];
-      if (this.codigo.length < 1 || this.codigo.length > 50) {
-        this.validaMensaje.push(
-          "El codigo del producto debe tener entre 1-50 caracteres."
-        );
-      }
-      if (this.nombre.length < 1 || this.nombre.length > 50) {
-        this.validaMensaje.push(
-          "El nombre del producto debe tener entre 1-50 caracteres."
-        );
-      }
-      if (this.nombresCategorias.indexOf(this.selectCategoria) === -1) {
-        this.validaMensaje.push("Debe seleccionar una categoría.");
-      }
-      if (this.descripcion.length < 1) {
-        this.validaMensaje.push(
-          "La descripción del producto no debe ser nula."
-        );
-      }
-      if (this.caracteristicas.length < 1) {
-        this.validaMensaje.push(
-          "La característica del producto no debe ser nula."
-        );
-      }
-      if (this.urlImage.length < 1) {
-        this.validaMensaje.push("La url Imagen no debe ser nula.");
-      }
-      if (this.validaMensaje.length) {
-        this.valida = 1;
-      }
-      console.log(this.descripcion);
-      return this.valida;
-    },
-    guardar() {
-      let me = this;
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
-      if (this.validar()) {
-        return;
-      }
-      if (this.editedIndex > -1) {
-        //Código para editar
-        let idCat =
-          me.idCategorias[me.nombresCategorias.indexOf(me.selectCategoria)];
-        axios
-          .post(
-            "articulo/update",
-            {
-              codigo: this.codigo,
-              nombre: this.nombre,
-              descripcion: this.descripcion,
-              caracteristicas: this.caracteristicas,
-              urlImage: this.urlImage,
-              categoriaId: idCat,
-            },
-            configuracion
-          )
-          .then(function (response) {
-            me.limpiar();
-            me.close();
-            me.listar();
-            console.log(response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      } else {
-        //Código para guardar
-        let idCat =
-          me.idCategorias[me.nombresCategorias.indexOf(me.selectCategoria)];
-        axios
-          .post(
-            "articulo/add",
-            {
-              codigo: this.codigo,
-              nombre: this.nombre,
-              descripcion: this.descripcion,
-              caracteristicas: this.caracteristicas,
-              urlImage: this.urlImage,
-              categoriaId: idCat,
-            },
-            configuracion
-          )
-          .then(function (response) {
-            me.limpiar();
-            me.close();
-            me.listar();
-            console.log(response.data);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      }
-    },
-    editItem(item) {
-      this.id = item.id;
-      this.codigo = item.codigo;
-      this.nombre = item.nombre;
-      this.descripcion = item.descripcion;
-      this.selectCategoria = item.categoria.nombre;
-      this.urlImage = item.urlImage;
-      this.caracteristicas = item.caracteristicas;
-      this.dialog = true;
-      this.editedIndex = 1;
-    },
-    activarDesactivarMostrar(accion, item) {
-      this.adModal = 1;
-      this.adNombre = item.nombre;
-      this.adId = item.id;
-      if (accion == 1) {
-        this.adAccion = 1;
-      } else if (accion == 2) {
-        this.adAccion = 2;
-      } else {
-        this.adModal = 0;
-      }
-    },
-    activarDesactivarCerrar() {
-      this.adModal = 0;
-    },
-    activar() {
-      let me = this;
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
 
-      axios
-        .put("articulo/activate", { id: this.adId }, configuracion)
-        .then(function (response) {
-          me.adModal = 0;
-          me.adAccion = 0;
-          me.adNombre = "";
-          me.adId = "";
-          me.listar();
-          me.limpiar();
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    desactivar() {
-      let me = this;
+  created() {
+    this.listItems();
+  },
+
+  methods: {
+    listItems() {
+      let products = this.products;
       let header = { Token: this.$store.state.token };
       let configuracion = { headers: header };
       axios
-        .put("articulo/deactivate", { id: this.adId }, configuracion)
+        .get("/usuario/list", configuracion)
         .then(function (response) {
-          me.adModal = 0;
-          me.adAccion = 0;
-          me.adNombre = "";
-          me.adId = "";
-          me.listar();
-          console.log(response.data);
+          products.products = response.data;
         })
         .catch(function (error) {
           console.log(error);
         });
     },
+
+    clear() {
+      this.id = "";
+      this.name = "";
+      this.status = 1;
+      this.provider = "";
+      this.description = "";
+      this.editedIndex = -1;
+    },
+
+    editItem(item) {
+      this.editedIndex = this.products.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+
+    deleteItem(item) {
+      this.editedIndex = this.products.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialogDelete = true;
+    },
+
+    deleteItemConfirm() {
+      this.products.splice(this.editedIndex, 1);
+      this.closeDelete();
+    },
+
     close() {
-      this.limpiar();
+      this.dialog = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+
+    closeDelete() {
+      this.dialogDelete = false;
+      this.$nextTick(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      });
+    },
+
+    save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.products[this.editedIndex], this.editedItem);
+      } else {
+        this.products.push(this.editedItem);
+      }
+      this.close();
     },
   },
 };

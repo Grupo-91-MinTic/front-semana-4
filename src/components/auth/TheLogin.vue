@@ -63,16 +63,9 @@ export default {
         })
         .then((data) => {
           this.$store.dispatch("keepToken", data.tokenReturn);
-          swal(
-            "Exitoso",
-            "Hola de nuevo " + this.$store.state.user.nombre,
-            "success"
-          );
-          if(localStorage.getItem("rol") == "Administrador") {
-            this.$router.push({ name: "AdministrationMainContent" });
-          }else{
-            this.$router.push({ name: "LayoutMain" });
-          }
+          swal("Exitoso", "Bienvenido " + this.$store.state.user.nombre, "success");
+
+          this.$router.push({ name: "AdministrationMainContent" });
         })
         .catch((error) => {
           this.currentError = null;
@@ -88,7 +81,6 @@ export default {
     },
     cancelLogin() {
       this.$store.dispatch("close");
-      this.$router.push({ path: "principal" });
     },
     /**
     async loginUser() {

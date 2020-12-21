@@ -1,86 +1,64 @@
 <template>
-  <v-layout align-start>
-    <v-flex>
-      <v-toolbar text color="white">
-        <v-toolbar-title>Ventas</v-toolbar-title>
-        <v-divider class="mx-2" inset vertical></v-divider>
-        <v-spacer></v-spacer>
-        <v-text-field
-          class="text-xs-center"
-          v-model="search"
-          append-icon="search"
-          label="Búsqueda"
-          single-line
-          hide-details
-        ></v-text-field>
-        <v-spacer></v-spacer>
-      </v-toolbar>
-      <v-data-table
-        :headers="headers"
-        :items="ventas"
-        :search="search"
-        class="elevation-1"
-      >
-        <template v-slot:[`item.articulo`]="{ item }">
-          <div v-if="item.articulo.urlImage">
-            <v-avatar>
-              <img :src="item.articulo.urlImage" :alt="item.articulo.nombre" />
-            </v-avatar>
-          </div>
-          <span> {{ item.articulo.nombre }}</span>
-        </template>
-        <template v-slot:no-data>
-          <v-btn color="primary" @click="listar()">Resetear</v-btn>
-        </template>
-      </v-data-table>
-    </v-flex>
-  </v-layout>
+  <v-card>
+    <v-card-title> Ventas </v-card-title>
+    <v-simple-table fixed-header height="300px">
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Id</th>
+            <th class="text-left">Id usuario</th>
+            <th class="text-left">Id articulo</th>
+            <th class="text-left">Cantidad</th>
+            <th class="text-left">Precio del articulo</th>
+            <th class="text-left">Nombre del articulo</th>
+            <th class="text-left">Personalizacion del cliente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in toke" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.usuarioId }}</td>
+            <td>{{ item.articuloId }}</td>
+            <td>{{ item.cantidad }}</td>
+            <td>{{ item.articulo.precio_venta }}</td>
+            <td>{{ item.articulo.nombre }}</td>
+            <td>{{ item.descripcion }}</td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+  </v-card>
 </template>
 <script>
-import axios from "axios";
 export default {
+  name: "Client",
   data() {
     return {
-      search: "",
-      ventas: [],
-      headers: [
-        { text: "Artículo", value: "articulo", sortable: true },
-        { text: "Comprador", value: "usuario.nombre", sortable: true },
+      toke: [
         {
-          text: "Detalles personalizados",
-          value: "descripcion",
-          sortable: false,
+          id: 1,
+          descripcion: "lorem limsus test",
+          cantidad: 2,
+          usuarioId: 1,
+          articuloId: 1,
+          createdAt: "2020-12-19T21:20:16.137Z",
+          updatedAt: "2020-12-19T21:20:16.137Z",
+          articulo: {
+            id: 1,
+            codigo: "art00001",
+            nombre: "Articulo 1",
+            descripcion: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam maiores dolore enim tenetur minus? Cupiditate, voluptatum assumenda iure velit unde sit quis fuga, nostrum voluptatem repellat nobis corporis sapiente minus?",
+            precio_venta: 1000,
+            estado: 1,
+            categoriaId: 1,
+            createdAt: "2020-12-19T21:20:15.437Z",
+            updatedAt: "2020-12-19T21:20:15.437Z",
+          },
         },
-        { text: "Cantidad", value: "cantidad", sortable: false },
       ],
     };
   },
-  watch: {
-    dialog(val) {
-      val || this.close();
-    },
-  },
-  created() {
-    this.listar();
-  },
-  methods: {
-    listar() {
-      let me = this;
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
-      axios
-        .get("compra/list", configuracion)
-        .then(function (response) {
-          me.ventas = response.data;
-          console.log(me.ventas);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    close() {
-      this.limpiar();
-    },
-  },
 };
 </script>
+<style lang="css">
+</style>

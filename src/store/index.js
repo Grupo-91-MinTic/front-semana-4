@@ -8,8 +8,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     state: {
         token: null,
-        user: null,
-        rol: null,
+        user: null
     },
     mutations: {
         setToken(state, token) {
@@ -18,18 +17,12 @@ export default new Vuex.Store({
         setUser(state, user) {
             state.user = user;
         },
-        setRol(state, rol) {
-            state.rol = rol;
-        },
     },
     actions: {
         keepToken({ commit }, token) {
-            commit("setToken", token);
-            commit("setUser", decode(token));
-            commit("setRol", this.state.user.rol);
-            //console.log(this.state.rol);
-            localStorage.setItem("token", token);
-            localStorage.setItem("rol", this.state.user.rol);
+            commit("setToken", token)
+            commit("setUser", decode(token))
+            localStorage.setItem("token", token)
         },
         autoLogin({ commit }) {
             //console.log("autologin");
@@ -37,20 +30,14 @@ export default new Vuex.Store({
             if (token) {
                 commit("setToken", token);
                 commit("setUser", decode(token));
-                commit("setRol", this.state.user.rol);
             }
-            if (this.state.user.rol === "Administrador") {
-                router.push({ path: 'home' }).catch(() => { });
-            } else {
-                router.push({ path: 'principal' }).catch(() => { });
-            }
+            router.push({ name: 'home' }).catch(() => {});
         },
         close({ commit }) {
-            commit("setRol", null);
             commit("setUser", null);
             commit("setToken", null);
-            localStorage.removeItem("rol");
             localStorage.removeItem("token");
+            router.push({ path: '/' });
         }
     },
     modules: {}

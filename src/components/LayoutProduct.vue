@@ -1,59 +1,16 @@
 <template>
-  <v-container fluid>
+  <div>
     <h2>Productos</h2>
-    <v-row dense>
-      <v-col
-        style="display: inline-flex; margin: 0.8em"
-        v-for="(product, index) of products"
-        cols="card.flex"
-        :key="index"
-      >
-        <v-sheet class="mx-auto">
-          <layout-product-card :articles="product"></layout-product-card>
-        </v-sheet>
-      </v-col>
-      <administration-footer></administration-footer>
-    </v-row>
-  </v-container>
+    <!-- <v-container fluid="false" style="margin: 0px; padding: 0px; width: 100%"> -->
+      <layout-banner></layout-banner>
+    <!-- </v-container> -->
+  </div>
 </template>
 <script>
-import axios from "axios";
-import LayoutProductCard from "./LayoutProductCard.vue";
-import AdministrationFooter from "./AdministrationFooter.vue";
+import LayoutBanner from "./LayoutBanner.vue";
 export default {
-  components: { LayoutProductCard, AdministrationFooter },
   name: "LayoutProduct",
-  data() {
-    return {
-      products: [],
-      headers: [
-        { text: "Nombre", value: "nombre", sortable: false },
-        { text: "Descripción", value: "descripcion", sortable: false },
-        { text: "Características", value: "caracteristicas", sortable: false },
-        { text: "Imagen", value: "urlImage", sortable: false },
-        { text: "Estado", value: "estado", sortable: false },
-        { text: "Opciones", value: "opciones", sortable: false },
-      ],
-    };
-  },
-  created() {
-    this.listar();
-  },
-  methods: {
-    listar() {
-      let me = this;
-      let header = { Token: this.$store.state.token };
-      let configuracion = { headers: header };
-      axios
-        .get("articulo/list", configuracion)
-        .then(function (response) {
-          me.products = response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-  },
+   components: { LayoutBanner,},
 };
 </script>
 <style lang="css">

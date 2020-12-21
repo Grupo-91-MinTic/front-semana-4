@@ -71,7 +71,7 @@
                 <v-list-item-title> Contenidos </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-          </v-list-group>
+          </v-list-group> 
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -86,16 +86,9 @@
         <span class="hidden-sm-and-down">Menu</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <div v-if="this.rol">
-        <v-btn @click="logOut" icon>
-          <v-icon>logout</v-icon>
-        </v-btn>
-      </div>
-      <div v-else>
-        <v-btn @click="sendLogin" icon>
-          <v-icon>login</v-icon>
-        </v-btn>
-      </div>
+      <v-btn @click="sendLogin" icon>
+        <v-icon>login</v-icon>
+      </v-btn>
     </v-app-bar>
   </div>
 </template>
@@ -104,28 +97,12 @@ export default {
   name: "HomeNavigator",
   data() {
     return {
-      rol: null,
-      token: null,
       drawer: false,
     };
   },
-  created() {
-    this.checkSession();
-  },
   methods: {
     sendLogin() {
-      this.$router.push({path: "login"});
-    },
-    logOut() {
-      this.$store.dispatch("close");
-      this.sendLogin();
-    },
-    checkSession() {
-      try {
-        this.$store.dispatch("autoLogin");
-      } catch (error) {
-        console.log("No se han registrado usuarios");
-      }
+      this.$router.push("/login");
     },
   },
 };
