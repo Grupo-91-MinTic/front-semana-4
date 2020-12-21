@@ -16,10 +16,11 @@
   </v-container>
 </template>
 <script>
-import LayoutProductCard from "./LayoutProductCard.vue";
 import axios from "axios";
+import LayoutProductCard from "./LayoutProductCard.vue";
+import AdministrationFooter from './AdministrationFooter.vue';
 export default {
-  components: { LayoutProductCard },
+  components: { LayoutProductCard, AdministrationFooter },
   name: "LayoutProduct",
   data() {
     return {

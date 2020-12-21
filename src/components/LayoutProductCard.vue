@@ -13,14 +13,11 @@
         </v-expand-transition>
       </v-img>
       <v-card-text class="pt-6" style="position: relative">
-        <v-dialog
-          @click="this.checkUser()"
-          max-width="1000px"
-          v-model="dialog"
-          persistent
-        >
+        <br />
+        <v-dialog max-width="1000px" v-model="dialog" persistent>
           <template v-slot:activator="{ on, attrs }">
             <v-btn
+              @click="this.checkUser()"
               class="white--text"
               v-bind="attrs"
               color="info"
@@ -37,8 +34,12 @@
           </template>
           <v-card>
             <v-card-title>
-              <span class="headline"
-                >¡Personaliza tu <strong>{{ articles.nombre }}</strong
+              <span class="headline">
+                ¡Personaliza tu <strong>{{ articles.nombre }}</strong>
+              </span>
+              <v-spacer></v-spacer>
+              <span class="headline">
+                <strong> {{ user.nombre }}</strong
                 >!
               </span>
             </v-card-title>
@@ -65,30 +66,6 @@
                       required
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      label="Password*"
-                      type="password"
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6">
-                    <v-autocomplete
-                      :items="[
-                        'Skiing',
-                        'Ice hockey',
-                        'Soccer',
-                        'Basketball',
-                        'Hockey',
-                        'Reading',
-                        'Writing',
-                        'Coding',
-                        'Basejump',
-                      ]"
-                      label="Interests"
-                      multiple
-                    ></v-autocomplete>
-                  </v-col>
                   <v-col cols="12" sm="6">
                     <v-select
                       :items="[
@@ -100,6 +77,12 @@
                       label="Medio de pago *"
                       required
                     ></v-select>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-textarea
+                      name="input-5-4"
+                      label="¿Que cambios deseas?"
+                    ></v-textarea>
                   </v-col>
                 </v-row>
               </v-container>
@@ -133,6 +116,7 @@
   </v-hover>
 </template>
 <script>
+import swal from "sweetalert";
 export default {
   name: "LayoutProductCard",
   props: {
@@ -140,16 +124,28 @@ export default {
   },
   data() {
     return {
+      user: null,
       dialog: false,
-      user: {},
+      compras: {
+        id_user: "",
+        id_product: "",
+        quantity: 1,
+        price: 0,
+        product: "",
+        description: "",
+      }
     };
+  },
+  created() {
+    this.checkUser();
   },
   methods: {
     checkUser() {
-      this.user = localStorage.getItem("user");
+      this.user = this.$store.state.user;
       console.log("Checked");
-      if (this.user) {
+      if (!this.user) {
         this.$router.push({ path: "login" });
+        swal("Tenemos un problema", "Debes registrarte primero...", "warning");
       }
     },
   },

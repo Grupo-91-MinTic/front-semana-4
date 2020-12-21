@@ -27,8 +27,7 @@ export default new Vuex.Store({
             commit("setToken", token);
             commit("setUser", decode(token));
             commit("setRol", this.state.user.rol);
-            console.log(this.state.rol);
-
+            //console.log(this.state.rol);
             localStorage.setItem("token", token);
             localStorage.setItem("rol", this.state.user.rol);
         },
@@ -52,7 +51,6 @@ export default new Vuex.Store({
             commit("setToken", null);
             localStorage.removeItem("rol");
             localStorage.removeItem("token");
-            router.push({ path: 'principal' });
         }
     },
     modules: {}

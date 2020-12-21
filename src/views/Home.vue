@@ -12,7 +12,8 @@ export default {
   components: { HomeNavigator, LayoutHome },
   methods: {
     sendMain() {
-      this.$router.push("/principal");
+      this.$router.push({path: "principal"});
+      console.log("Home");
     },
   },
   created() {

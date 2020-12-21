@@ -57,7 +57,7 @@ export default {
           avatar: "https://avatars0.githubusercontent.com/u/75107873?s=96&v=4",
           nombre: "Harold Alejandro Caicedo",
           rol: "Bibliotecario de proyecto, Frontend developer",
-          profile: "    ",
+          profile: "https://github.com/AlejoCM12",
           descripcion:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nobis accusamus veritatis esse velit sint laudantium adipisci provident, fugiat quam voluptatem quisquam ab cum recusandae nemo, delectus exercitationem alias? Labore?",
         },

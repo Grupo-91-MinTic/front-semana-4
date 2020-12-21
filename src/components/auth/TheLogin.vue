@@ -88,6 +88,7 @@ export default {
     },
     cancelLogin() {
       this.$store.dispatch("close");
+      this.$router.push({ path: "principal" });
     },
     /**
     async loginUser() {

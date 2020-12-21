@@ -118,10 +118,14 @@ export default {
     },
     logOut() {
       this.$store.dispatch("close");
+      this.sendLogin();
     },
-    async checkSession() {
-      this.token = await localStorage.getItem("token");
-      this.rol = await localStorage.getItem("rol");
+    checkSession() {
+      try {
+        this.$store.dispatch("autoLogin");
+      } catch (error) {
+        console.log("No se han registrado usuarios");
+      }
     },
   },
 };
