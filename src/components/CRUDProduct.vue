@@ -182,7 +182,7 @@ export default {
       headers: [
         { text: "Nombre", value: "nombre", sortable: false },
         { text: "Descripción", value: "descripcion", sortable: false },
-        { text: "características", value: "caracteristicas", sortable: false },
+        { text: "Características", value: "caracteristicas", sortable: false },
         { text: "Imagen", value: "urlImage", sortable: false },
         { text: "Estado", value: "estado", sortable: false },
         { text: "Opciones", value: "opciones", sortable: false },

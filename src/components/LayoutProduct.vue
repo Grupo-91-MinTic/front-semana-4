@@ -1,15 +1,13 @@
 <template>
   <v-container>
     <h2>Productos</h2>
-    <v-row justify="space-around">
+    <v-row>
       <v-col
-        style="display: inline-flex; margin: 1em"
+        style="display: inline-flex; margin: 0.5em"
         v-for="(product, index) of products"
         :key="index"
-        cols="12"
-        md="3"
       >
-        <v-sheet :rounded="rounded" class="mx-auto">
+        <v-sheet class="mx-auto">
           <layout-product-card :articles="product"></layout-product-card>
         </v-sheet>
       </v-col>
@@ -19,57 +17,40 @@
 </template>
 <script>
 import LayoutProductCard from "./LayoutProductCard.vue";
+import axios from "axios";
 export default {
   components: { LayoutProductCard },
   name: "LayoutProduct",
   data() {
     return {
-      products: [
-        {
-          image:
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
-          price: "80.00",
-          company: "Especial 91",
-          name: "keyboard",
-          descripcion:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
-        },
-        {
-          image:
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
-          price: "80.00",
-          name: "keyboard",
-          descripcion:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
-        },
-        {
-          image:
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
-          price: "80.00",
-          company: "Especial 91",
-          name: "keyboard",
-          descripcion:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
-        },
-        {
-          image:
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
-          price: "80.00",
-          name: "keyboard",
-          descripcion:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
-        },
-        {
-          image:
-            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
-          price: "80.00",
-          name: "keyboard",
-          company: "Especial 91",
-          descripcion:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
-        },
+      products: [],
+      headers: [
+        { text: "Nombre", value: "nombre", sortable: false },
+        { text: "Descripción", value: "descripcion", sortable: false },
+        { text: "Características", value: "caracteristicas", sortable: false },
+        { text: "Imagen", value: "urlImage", sortable: false },
+        { text: "Estado", value: "estado", sortable: false },
+        { text: "Opciones", value: "opciones", sortable: false },
       ],
     };
+  },
+  created() {
+    this.listar();
+  },
+  methods: {
+    listar() {
+      let me = this;
+      let header = { Token: this.$store.state.token };
+      let configuracion = { headers: header };
+      axios
+        .get("articulo/list", configuracion)
+        .then(function (response) {
+          me.products = response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

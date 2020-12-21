@@ -124,7 +124,7 @@
             check
           </v-icon>
         </template>
-        <template v-slot:[`item.estado`]="{ item }">
+        <template v-slot:[`-item.estado`]="{ item }">
           <div v-if="item.estado">
             <span class="blue--text">Activo</span>
           </div>

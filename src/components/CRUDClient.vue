@@ -10,7 +10,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in toke" :key="item.id">
+          <tr v-for="item in token" :key="item.id">
             <td>{{ item.id }}</td>
             <td>{{ item.usuarioId }}</td>
           </tr>

@@ -68,8 +68,11 @@ export default {
             "Bienvenido " + this.$store.state.user.nombre,
             "success"
           );
-
-          this.$router.push({ name: "AdministrationMainContent" });
+          if(localStorage.getItem("rol") == "Administrador") {
+            this.$router.push({ name: "AdministrationMainContent" });
+          }else{
+            this.$router.push({ name: "LayoutMain" });
+          }
         })
         .catch((error) => {
           this.currentError = null;

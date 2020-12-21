@@ -110,7 +110,7 @@ export default {
   methods: {
     logOut() {
       localStorage.removeItem("jwt");
-      this.$router.push("/");
+      this.$router.push({ path: "/principal" });
     },
   },
 };
