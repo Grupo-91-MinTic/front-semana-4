@@ -17,10 +17,12 @@
           <div></div>
         </v-sheet>
       </v-col>
+    <administration-footer></administration-footer>
     </v-row>
   </v-container>
 </template>
 <script>
+import AdministrationFooter from './AdministrationFooter.vue';
 import LayoutCreatorCard from "./LayoutCreatorCard.vue";
 export default {
   name: "LayoutCreator",
@@ -38,7 +40,7 @@ export default {
         {
           avatar: "https://avatars3.githubusercontent.com/u/75052415?s=96&v=4",
           nombre: "Carlos Senider Soto",
-          rol: "Main backend developer, BD admin",
+          rol: "Main backend developer, Administrador de base de datos",
           profile: "https://github.com/carSneider99",
           descripcion:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nobis accusamus veritatis esse velit sint laudantium adipisci provident, fugiat quam voluptatem quisquam ab cum recusandae nemo, delectus exercitationem alias? Labore?",
@@ -55,7 +57,7 @@ export default {
           avatar: "https://avatars0.githubusercontent.com/u/75107873?s=96&v=4",
           nombre: "Harold Alejandro Caicedo",
           rol: "Bibliotecario de proyecto, Frontend developer",
-          profile: "https://github.com/AlejoCM12",
+          profile: "    ",
           descripcion:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui nobis accusamus veritatis esse velit sint laudantium adipisci provident, fugiat quam voluptatem quisquam ab cum recusandae nemo, delectus exercitationem alias? Labore?",
         },
@@ -64,6 +66,7 @@ export default {
   },
   components: {
     LayoutCreatorCard,
+    AdministrationFooter,
   },
 };
 </script>
