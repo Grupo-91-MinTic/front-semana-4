@@ -65,7 +65,7 @@ export default {
           this.$store.dispatch("keepToken", data.tokenReturn);
           swal(
             "Exitoso",
-            "Bienvenido " + this.$store.state.user.nombre,
+            "Hola de nuevo " + this.$store.state.user.nombre,
             "success"
           );
           if(localStorage.getItem("rol") == "Administrador") {

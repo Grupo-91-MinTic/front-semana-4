@@ -1,10 +1,11 @@
 <template>
-  <v-container>
+  <v-container fluid>
     <h2>Productos</h2>
-    <v-row>
+    <v-row dense>
       <v-col
-        style="display: inline-flex; margin: 0.5em"
+        style="display: inline-flex; margin: 0.8em"
         v-for="(product, index) of products"
+        cols="card.flex"
         :key="index"
       >
         <v-sheet class="mx-auto">
@@ -18,7 +19,7 @@
 <script>
 import axios from "axios";
 import LayoutProductCard from "./LayoutProductCard.vue";
-import AdministrationFooter from './AdministrationFooter.vue';
+import AdministrationFooter from "./AdministrationFooter.vue";
 export default {
   components: { LayoutProductCard, AdministrationFooter },
   name: "LayoutProduct",

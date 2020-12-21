@@ -1,6 +1,6 @@
 <template>
   <v-hover v-slot="{ hover }">
-    <v-card class="mx-auto" max-width="800">
+    <v-card class="mx-auto" max-width="800" min-width="300">
       <v-img :aspect-ratio="16 / 9" :src="articles.urlImage">
         <v-expand-transition>
           <div
@@ -8,20 +8,20 @@
             class="d-flex transition-fast-in-fast-out info darken-2 v-card--reveal display-3 white--text"
             style="height: 100%"
           >
-            ${{ articles.precio_venta }}
+            <span class="text-h3">${{ articles.precio_venta }}</span>
           </div>
         </v-expand-transition>
       </v-img>
       <v-card-text class="pt-6" style="position: relative">
         <br />
         <v-dialog max-width="1000px" v-model="dialog" persistent>
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:[`articles`]="{ item }">
             <v-btn
-              @click="this.checkUser()"
+              @click="buyProduct(item)"
               class="white--text"
-              v-bind="attrs"
+              v-bind="item"
               color="info"
-              v-on="on"
+              v-on="item"
               absolute
               large
               right
@@ -48,26 +48,22 @@
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      label="Legal first name*"
+                      v-model="shopping.quantity"
+                      hint="¿Cuantos deseas llevar?"
+                      label="Cantidad *"
                       required
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
-                      label="Legal middle name"
-                      hint="example of helper text only on focus"
+                      label="Color"
+                      v-model="shopping.color"
+                      hint="¿Prefieres otro color?"
                     ></v-text-field>
                   </v-col>
                   <v-col cols="12" sm="6" md="4">
-                    <v-text-field
-                      label="Legal last name*"
-                      hint="example of persistent helper text"
-                      persistent-hint
-                      required
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="6">
                     <v-select
+                      v-model="shopping.pay"
                       :items="[
                         'PayPal',
                         'MasterCard',
@@ -82,7 +78,15 @@
                     <v-textarea
                       name="input-5-4"
                       label="¿Que cambios deseas?"
+                      v-model="shopping.description"
+                      hint="Si escribes concreto llega más rapido"
                     ></v-textarea>
+                  </v-col>
+
+                  <v-col>
+                    <pre>
+                      {{ shopping }}
+                    </pre>
                   </v-col>
                 </v-row>
               </v-container>
@@ -110,6 +114,8 @@
         </h3>
         <div class="font-weight-light title mb-2">
           {{ articles.descripcion }}
+          <hr />
+          {{ articles.caracteristicas }}
         </div>
       </v-card-text>
     </v-card>
@@ -126,20 +132,25 @@ export default {
     return {
       user: null,
       dialog: false,
-      compras: {
+      shopping: {
         id_user: "",
         id_product: "",
         quantity: 1,
         price: 0,
         product: "",
+        color: "",
+        pay: "",
         description: "",
-      }
+      },
     };
   },
   created() {
     this.checkUser();
   },
   methods: {
+    buyProduct() {
+      this.dialog = false;
+    },
     checkUser() {
       this.user = this.$store.state.user;
       console.log("Checked");
