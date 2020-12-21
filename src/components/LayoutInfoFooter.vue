@@ -5,7 +5,7 @@
         <h2 class="white--text text-center">
           Encuentra información del desarrollo aquí
         </h2>
-        <br>
+        <br />
         <br />
         <a
           class="mx-auto d-block text-center text-decoration-none white--text"
@@ -102,7 +102,7 @@
         <v-divider inset dark></v-divider>
         <br />
         <a
-          href="https://github.com/carSneider99"
+          href="https://www.linkedin.com/in/carlos-sneider-soto-sogamoso"
           class="text-decoration-none white--text pa-2 ma-auto"
           rel="noopener noreferrer"
           target="_blank"

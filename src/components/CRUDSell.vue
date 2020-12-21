@@ -47,7 +47,8 @@ export default {
             id: 1,
             codigo: "art00001",
             nombre: "Articulo 1",
-            descripcion: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam maiores dolore enim tenetur minus? Cupiditate, voluptatum assumenda iure velit unde sit quis fuga, nostrum voluptatem repellat nobis corporis sapiente minus?",
+            descripcion:
+              "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Veniam maiores dolore enim tenetur minus? Cupiditate, voluptatum assumenda iure velit unde sit quis fuga, nostrum voluptatem repellat nobis corporis sapiente minus?",
             precio_venta: 1000,
             estado: 1,
             categoriaId: 1,

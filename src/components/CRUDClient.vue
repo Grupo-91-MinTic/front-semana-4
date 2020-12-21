@@ -23,9 +23,7 @@
 export default {
   name: "Client",
   data() {
-    return {
-
-    };
+    return {};
   },
 };
 </script>

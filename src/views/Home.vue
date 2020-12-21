@@ -6,7 +6,7 @@
 </template>
 <script>
 import HomeNavigator from "../components/HomeNavigator.vue";
-import LayoutHome from '../components/LayoutHome.vue';
+import LayoutHome from "../components/LayoutHome.vue";
 export default {
   name: "Home",
   components: { HomeNavigator, LayoutHome },

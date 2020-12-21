@@ -26,37 +26,47 @@ export default {
     return {
       products: [
         {
-          image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
+          image:
+            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
           price: "80.00",
           company: "Especial 91",
           name: "keyboard",
-          descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta."
+          descripcion:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
         },
         {
-          image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
+          image:
+            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
           price: "80.00",
           name: "keyboard",
-          descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta."
+          descripcion:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
         },
         {
-          image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
+          image:
+            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
           price: "80.00",
           company: "Especial 91",
           name: "keyboard",
-          descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta."
+          descripcion:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
         },
         {
-          image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
+          image:
+            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
           price: "80.00",
           name: "keyboard",
-          descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta."
+          descripcion:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
         },
         {
-          image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
+          image:
+            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyopagolojusto.com%2F_files%2F200003139-e518be615f%2FOFERTA%2520ESPECIAL.png&f=1&nofb=1",
           price: "80.00",
           name: "keyboard",
           company: "Especial 91",
-          descripcion: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta."
+          descripcion:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim accusantium, atque qui sint, asperiores eum repellendus beatae commodi in cum et, accusamus quia similique exercitationem maxime eaque earum! Porro, dicta.",
         },
       ],
     };

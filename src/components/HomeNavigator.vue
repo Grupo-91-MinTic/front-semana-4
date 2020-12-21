@@ -71,7 +71,7 @@
                 <v-list-item-title> Contenidos </v-list-item-title>
               </v-list-item-content>
             </v-list-item>
-          </v-list-group> 
+          </v-list-group>
         </template>
       </v-list>
     </v-navigation-drawer>

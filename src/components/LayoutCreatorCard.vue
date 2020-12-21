@@ -10,7 +10,9 @@
     <br />
     <hr />
 
-    <v-card-title style="text-align: justify"> {{ member.nombre }} </v-card-title>
+    <v-card-title style="text-align: justify">
+      {{ member.nombre }}
+    </v-card-title>
 
     <v-card-subtitle> {{ member.rol }} </v-card-subtitle>
 

@@ -6,9 +6,7 @@
 <script>
 export default {
   name: "HomeComponent",
-  
-}
+};
 </script>
 <style lang="css">
-  
 </style>

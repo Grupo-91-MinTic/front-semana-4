@@ -17,12 +17,12 @@
           <div></div>
         </v-sheet>
       </v-col>
-    <administration-footer></administration-footer>
+      <administration-footer></administration-footer>
     </v-row>
   </v-container>
 </template>
 <script>
-import AdministrationFooter from './AdministrationFooter.vue';
+import AdministrationFooter from "./AdministrationFooter.vue";
 import LayoutCreatorCard from "./LayoutCreatorCard.vue";
 export default {
   name: "LayoutCreator",

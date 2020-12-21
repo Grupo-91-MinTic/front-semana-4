@@ -63,7 +63,11 @@ export default {
         })
         .then((data) => {
           this.$store.dispatch("keepToken", data.tokenReturn);
-          swal("Exitoso", "Bienvenido " + this.$store.state.user.nombre, "success");
+          swal(
+            "Exitoso",
+            "Bienvenido " + this.$store.state.user.nombre,
+            "success"
+          );
 
           this.$router.push({ name: "AdministrationMainContent" });
         })
