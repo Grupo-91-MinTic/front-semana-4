@@ -2,8 +2,8 @@
   <!-- <v-container fluid="true"> -->
   <v-carousel hide-delimiters cycle>
     <v-carousel-item
-      v-for="(item, i) in items"
-      :key="i"
+      v-for="(item, index) in items"
+      :key="index"
       :src="item.src"
       reverse-transition="fade-transition"
       transition="fade-transition"
