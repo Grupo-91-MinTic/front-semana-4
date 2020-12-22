@@ -1,6 +1,7 @@
 <template>
   <v-container fluid>
-    <h2>Productos</h2>
+    <layout-banner></layout-banner>
+    <h1 class="h1 text-center white--text info">Nuestros productos</h1>
     <v-row dense>
       <v-col
         style="display: inline-flex; margin: 0.8em"
@@ -20,8 +21,9 @@
 import axios from "axios";
 import LayoutProductCard from "./LayoutProductCard.vue";
 import AdministrationFooter from "./AdministrationFooter.vue";
+import LayoutBanner from './LayoutBanner.vue';
 export default {
-  components: { LayoutProductCard, AdministrationFooter },
+  components: { LayoutProductCard, AdministrationFooter, LayoutBanner },
   name: "LayoutProduct",
   data() {
     return {

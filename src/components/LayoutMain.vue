@@ -1,6 +1,7 @@
 <template>
   <v-container fluid="true">
     <layout-banner></layout-banner>
+    <layout-category></layout-category>
     <div class="mt-16 grey lighten-5">
       <div class="pa-8">
         <h2 class="text-center mt-6">¿Quiénes somos?</h2>
@@ -46,9 +47,10 @@
 </template>
 <script>
 import LayoutBanner from "./LayoutBanner.vue";
+import LayoutCategory from './LayoutCategory.vue';
 export default {
   name: "LayoutMain",
-  components: { LayoutBanner },
+  components: { LayoutBanner, LayoutCategory },
 };
 </script>
 <style lang="css">

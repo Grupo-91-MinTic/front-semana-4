@@ -1,26 +1,26 @@
 <template>
-  <!-- <v-container fluid="true"> -->
-  <v-carousel hide-delimiters cycle>
-    <v-carousel-item
-      v-for="(item, index) in items"
-      :key="index"
-      :src="item.src"
-      reverse-transition="fade-transition"
-      transition="fade-transition"
-    >
-      <v-row class="fill-height" align="end" justify="center">
-        <v-container fluid="true">
-          <div
-            style="background: rgba(0, 0, 0, 0.65)"
-            class="display-2 text-center p-5"
-          >
-            {{ item.txt }}
-          </div>
-        </v-container>
-      </v-row>
-    </v-carousel-item>
-  </v-carousel>
-  <!-- </v-container> -->
+  <v-container fluid="true">
+    <v-carousel hide-delimiters cycle>
+      <v-carousel-item
+        v-for="(item, index) in items"
+        :key="index"
+        :src="item.src"
+        reverse-transition="fade-transition"
+        transition="fade-transition"
+      >
+        <v-row class="fill-height" align="end" justify="center">
+          <v-container fluid="true">
+            <div
+              style="background: rgba(0, 0, 0, 0.65)"
+              class="display-2 text-center p-5"
+            >
+              {{ item.txt }}
+            </div>
+          </v-container>
+        </v-row>
+      </v-carousel-item>
+    </v-carousel>
+  </v-container>
 </template>
 <script>
 export default {

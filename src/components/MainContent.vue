@@ -14,5 +14,9 @@ export default {
   name: "MainContent",
 };
 </script>
-<style lang="css">
+<style lang="css" scoped>
+h1, h2{
+  font-family: 'Merriweather', serif;
+  font-family: 'Noto Sans JP', sans-serif;
+}
 </style>
