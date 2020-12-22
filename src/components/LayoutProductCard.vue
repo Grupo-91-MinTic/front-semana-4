@@ -15,11 +15,11 @@
       <v-card-text class="pt-6" style="position: relative">
         <br />
         <v-dialog max-width="1000px" v-model="dialog" persistent>
-          <template v-slot:axtivator="{ on, attr }">
+          <template v-slot:activator="{ on, attrs }">
             <v-btn
               @click="buyProduct(articles)"
               class="white--text"
-              v-bind="attr"
+              v-bind="attrs"
               color="info"
               v-on="on"
               absolute
