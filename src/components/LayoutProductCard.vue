@@ -14,10 +14,9 @@
       </v-img>
       <v-card-text class="pt-6" style="position: relative">
         <br />
-        <v-dialog max-width="1000px" v-model="dialog" persistent>
+        <v-dialog max-width="500px" v-model="dialog">
           <template v-slot:activator="{ on, attrs }">
             <v-btn
-              @click="buyProduct(articles)"
               class="white--text"
               v-bind="attrs"
               color="info"
@@ -64,45 +63,38 @@
                   <v-col cols="12" sm="6" md="4">
                     <v-select
                       v-model="shopping.pay"
-                      :items="[
-                        'PayPal',
-                        'MasterCard',
-                        'Transferencia bancaria',
-                        'BitCoin',
-                      ]"
+                      :items="opcionesPago"
                       label="Medio de pago *"
                       required
                     ></v-select>
                   </v-col>
                   <v-col cols="12">
                     <v-textarea
+                      counter
+                      maxlength="255"
                       name="input-5-4"
                       label="¿Que cambios deseas?"
                       v-model="shopping.description"
-                      hint="Si escribes concreto llega más rapido"
+                      hint="Se muy explícito, describe cómo quieres tu producto"
                     ></v-textarea>
                   </v-col>
-
+                  <v-flex xs12 sm12 md12 v-show="valida">
+                    <div
+                      class="red--text"
+                      v-for="v in validaMensaje"
+                      :key="v"
+                      v-text="v"
+                    ></div>
+                  </v-flex>
                   <v-col>
-                    <pre>
-                      {{ shopping }}
-                    </pre>
                   </v-col>
                 </v-row>
               </v-container>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="blue darken-1" text @click="dialog = false">
-                Cancelar
-              </v-btn>
-              <v-btn
-                elevation="2"
-                @click="dialog = false"
-                color="primary darken-1"
-              >
-                Comprar
-              </v-btn>
+              <v-btn color="blue darken-1" text @click="close">Cancelar</v-btn>
+              <v-btn color="blue darken-1" text @click="buyProduct(articles)">Comprar</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -123,6 +115,7 @@
 </template>
 <script>
 import swal from "sweetalert";
+import axios from 'axios';
 export default {
   name: "LayoutProductCard",
   props: {
@@ -132,12 +125,12 @@ export default {
     return {
       user: null,
       dialog: false,
+      valida:'',
+      validaMensaje: '',
+      opcionesPago: '',
       shopping: {
-        id_user: "",
         id_product: "",
-        quantity: 1,
-        price: 0,
-        product: "",
+        quantity: "",
         color: "",
         pay: "",
         description: "",
@@ -145,10 +138,72 @@ export default {
     };
   },
   created() {
+    this.opcionesPago = ['PayPal','MasterCard','Transferencia bancaria','BitCoin'];
     this.checkUser();
   },
   methods: {
-    buyProduct() {
+    validar() {
+      this.valida = 0;
+      this.validaMensaje = [];
+      if (isNaN(this.shopping.quantity) || this.shopping.quantity.length < 1) {
+        this.validaMensaje.push(
+          "La cantidad a comprar debe ser númerica."
+        );
+      }
+      if (this.shopping.color.length < 1 || this.shopping.color.length > 50) {
+        this.validaMensaje.push(
+          "El color del producto debe tener entre 1-50 caracteres."
+        );
+      }
+      if (this.opcionesPago.indexOf(this.shopping.pay) === -1) {
+        this.validaMensaje.push("Debe seleccionar un medio de pago.");
+      }
+      if (this.shopping.description.length < 1) {
+        this.validaMensaje.push(
+          "La descripción del producto no debe ser nula."
+        );
+      }
+      if (this.validaMensaje.length) {
+        this.valida = 1;
+      }
+      return this.valida;
+    },
+    buyProduct(articles) {
+      console.log(this.$store.state.user.id);
+      let me = this;
+      let header = { Token: this.$store.state.token };
+      let configuracion = { headers: header };
+      if (this.validar()) {
+        return;
+      }
+      this.shopping.id_product = articles.id;
+      let descriptionMod = "Color: " + this.shopping.color + " -Descripción: " + this.shopping.description + " -MPago: " + this.shopping.pay;
+      axios.post("compra/add",{
+        descripcion: descriptionMod,
+        cantidad: this.shopping.quantity,
+        articuloId: this.shopping.id_product,
+        usuarioId: this.$store.state.user.id,
+      },configuracion)
+      .then(function (response) {
+        me.limpiar();
+        me.close();
+        me.listar();
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    },
+    close() {
+      this.limpiar();
+    },
+    limpiar() {
+      this.shopping.id_product = '';
+      this.shopping.quantity = '';
+      this.shopping.color = '';
+      this.shopping.pay = '';
+      this.validaMensaje = [];
+      this.editedIndex = -1;
       this.dialog = false;
     },
     checkUser() {

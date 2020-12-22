@@ -313,12 +313,11 @@ export default {
       }
       if (this.editedIndex > -1) {
         //Código para editar
-        let idCat =
-          me.idCategorias[me.nombresCategorias.indexOf(me.selectCategoria)];
-        axios
-          .post(
+        let idCat = me.idCategorias[me.nombresCategorias.indexOf(me.selectCategoria)];
+        axios.put(
             "articulo/update",
             {
+              id: this.id,
               codigo: this.codigo,
               nombre: this.nombre,
               descripcion: this.descripcion,
