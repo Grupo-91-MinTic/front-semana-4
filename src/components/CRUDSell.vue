@@ -60,9 +60,6 @@ export default {
       val || this.close();
     },
   },
-  beforeUpdate() {
-    this.$store.dispatch("autoLogin", "user");
-  },
   created() {
     this.listar();
   },

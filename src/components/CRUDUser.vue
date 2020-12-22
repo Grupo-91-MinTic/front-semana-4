@@ -65,9 +65,6 @@ export default {
       val || this.close();
     },
   },
-  beforeUpdate() {
-    this.$store.dispatch("autoLogin", "venta");
-  },
   created() {
     this.listar();
   },

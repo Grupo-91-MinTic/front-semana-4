@@ -56,9 +56,6 @@ export default {
       val || this.close();
     },
   },
-  beforeUpdate() {
-    this.$store.dispatch("autoLogin", "cliente");
-  },
   created() {
     this.listar();
   },
