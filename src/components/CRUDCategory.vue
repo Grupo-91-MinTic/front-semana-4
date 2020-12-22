@@ -175,6 +175,9 @@ export default {
       val || this.close();
     },
   },
+  beforeCreate() {
+    this.$store.dispatch("autoLogin", "categoria");
+  },
   created() {
     this.listar();
   },

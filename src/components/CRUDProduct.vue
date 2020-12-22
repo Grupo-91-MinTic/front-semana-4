@@ -222,6 +222,9 @@ export default {
       val || this.close();
     },
   },
+  beforeUpdate() {
+    this.$store.dispatch("autoLogin", "articulo");
+  },
   created() {
     this.listar();
     this.listarCategorias();

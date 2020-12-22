@@ -123,6 +123,7 @@ export default {
     checkSession() {
       try {
         this.$store.dispatch("autoLogin");
+        this.rol = this.$store.state.rol;
       } catch (error) {
         console.log("No se han registrado usuarios");
       }

@@ -38,14 +38,14 @@ export default new Vuex.Store({
             localStorage.setItem("rol", this.state.user.rol);
             localStorage.setItem("id", this.state.user.id);
         },
-        autoLogin({ commit }) {
+        autoLogin({ commit },) {
             //console.log("autologin");
             let token = localStorage.getItem("token");
             if (token) {
+                commit("setId",)
                 commit("setToken", token);
                 commit("setUser", decode(token));
                 commit("setRol", this.state.user.rol);
-                commit("setId",)
             }
             if (this.state.user.rol === "Administrador") {
                 router.push({ path: 'home' }).catch(() => { });
@@ -54,10 +54,10 @@ export default new Vuex.Store({
             }
         },
         close({ commit }) {
+            commit("setId", null);
             commit("setRol", null);
             commit("setUser", null);
             commit("setToken", null);
-            commit("setId", null);
             localStorage.removeItem("rol");
             localStorage.removeItem("token");
             localStorage.removeItem("id");
