@@ -34,7 +34,7 @@ export default {
           country: "Perú",
           company: "MÍTIKAS ARTESANÍAS",
           comment: "Las artesanias son un pilar fundamental en la globalziacion de nuestra cultura ancestral peruana, por lo que como provedores principales de articulos artesanales recomendamos realizar todas las compras en esta empresa la cual es altamente calificada para distribuir productos de alta calidad traidos desde Perú.",
-          img: "https://scontent.fbog15-1.fna.fbcdn.net/v/t1.0-9/24293906_1186675571465021_5791743971729721762_n.jpg?_nc_cat=105&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeFyyaGoQPMeOSgvzKUnd4cVt9IiFB_MJVm30iIUH8wlWSNIlgXRjFFlz-JzVonytNU8ikLEMIxr3EjPi8o4P6lL&_nc_ohc=2S8LBQIj-E8AX8dNkMX&_nc_ht=scontent.fbog15-1.fna&oh=7735ba60c7a558ed5ac78161f2f094d0&oe=60079A39",
+          img: "../assets/mistikas.jpeg",
           link:"https://www.facebook.com/watch/mitikasartesanias/"
         },
         {
