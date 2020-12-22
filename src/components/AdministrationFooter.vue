@@ -1,6 +1,6 @@
 <template>
   <div class="footer">
-    <v-footer height="auto">
+    <v-footer height="auto" padless>
       <v-layout justify-center>
         <v-flex text-xs-center>
           <v-card flat tile color="primary" class="white--text">

@@ -22,15 +22,9 @@
           Nuestra organización
         </a>
         <br />
-        <p class="mx-auto d-block text-center white--text">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas nulla
-          iure nam qui quod? Ab illo dolorum, ipsam cumque eum explicabo
-          provident quisquam nesciunt sed, quia similique eveniet eligendi.
-          Distinctio. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Consequatur ducimus consequuntur, impedit officiis et laudantium
-          ratione velit doloribus dolorum consectetur fuga recusandae aut quam,
-          corrupti culpa neque provident quidem eos.
-        </p>
+        <layout-main-info
+          class="mx-auto d-block text-center white--text"
+        ></layout-main-info>
         <br />
         <a
           href="https://github.com/Grupo-91-MinTic/grupo-91-backend.git"
@@ -64,9 +58,13 @@
           ¿Te gusta nuestro trabajo?, Conocenos
         </h2>
         <br />
+        <br />
         <h3 class="white--text text-center">
-          Andrés Manuel Prieto Álvarez (Main Frontend, Scrum Master)
+          Andrés Manuel Prieto Álvarez
         </h3>
+        <blockquote class="white--text text-center">
+          (Main Frontend, Scrum Master)
+        </blockquote>
         <v-divider inset dark></v-divider>
         <br />
         <a
@@ -96,9 +94,14 @@
         </a>
         <br />
         <br />
+        <br />
         <h3 class="white--text text-center">
-          Carlos Senider Soto (Main backend, BD administrator)
+          Carlos Senider Soto
         </h3>
+        <blockquote class="white--text text-center">
+          (Main backend, BD administrator)
+        </blockquote>
+        
         <v-divider inset dark></v-divider>
         <br />
         <a
@@ -128,9 +131,11 @@
         </a>
         <br />
         <br />
-        <h3 class="white--text text-center">
-          Juan Sebastion Orduz (Main API manager, Backend developer)
-        </h3>
+        <br />
+        <h3 class="white--text text-center">Juan Sebastion Orduz</h3>
+        <blockquote class="white--text text-center">
+          (Main API manager, Backend developer)
+        </blockquote>
         <v-divider inset dark></v-divider>
         <br />
         <a
@@ -160,10 +165,11 @@
         </a>
         <br />
         <br />
-        <h3 class="white--text text-center">
-          Harold Alejandro Caicedo (Bibliotecario de proyecto, Frontend
-          developer)
-        </h3>
+        <br />
+        <h3 class="white--text text-center">Harold Alejandro Caicedo</h3>
+        <blockquote class="white--text text-center">
+          (Bibliotecario de proyecto, Frontend developer)
+        </blockquote>
         <v-divider inset dark></v-divider>
         <br />
         <a
@@ -195,14 +201,18 @@
       </v-col>
     </v-row>
 
-    <v-card-text class="py-2 white--text text-center accent">
+    <v-card-text class="py-2 white--text text-center grey darken-4">
       {{ new Date().getFullYear() }} — <strong>Grupo 91</strong>
     </v-card-text>
   </v-footer>
 </template>
 <script>
+import LayoutMainInfo from "./LayoutMainInfo.vue";
 export default {
   name: "LayoutInfoFooter",
+  components: {
+    LayoutMainInfo,
+  },
 };
 </script>
 <style lang="css">

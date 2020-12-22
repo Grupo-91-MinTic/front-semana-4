@@ -1,6 +1,6 @@
 <template>
   <v-card max-width="auto" class="mx-auto">
-    <v-toolbar color="gray" dark>
+    <v-toolbar class="grey darken-4 white--text">
       <v-spacer></v-spacer>
       <v-toolbar-title>Categorías</v-toolbar-title>
       <v-spacer></v-spacer>

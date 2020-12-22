@@ -1,7 +1,11 @@
 <template>
   <v-container fluid>
     <layout-banner></layout-banner>
-    <h1 class="h1 text-center white--text info">Nuestros productos</h1>
+    <v-toolbar class="grey darken-4 white--text ma-8">
+      <v-spacer></v-spacer>
+      <v-toolbar-title style="font-size: 54px">Nuestros productos</v-toolbar-title>
+      <v-spacer></v-spacer>
+    </v-toolbar>
     <v-row dense>
       <v-col
         style="display: inline-flex; margin: 0.8em"

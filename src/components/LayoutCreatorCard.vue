@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="355">
+  <v-card class="mx-auto" min-width="360">
     <br />
     <v-img
       :src="member.avatar"
