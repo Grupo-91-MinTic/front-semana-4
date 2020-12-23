@@ -38,7 +38,7 @@ export default new Vuex.Store({
             localStorage.setItem("rol", this.state.user.rol);
             localStorage.setItem("id", this.state.user.id);
         },
-        autoLogin({ commit },) {
+        autoLogin({ commit }) {
             //console.log("autologin");
             let token = localStorage.getItem("token");
             if (token) {
@@ -58,6 +58,7 @@ export default new Vuex.Store({
             commit("setRol", null);
             commit("setUser", null);
             commit("setToken", null);
+            commit("setId", null);
             localStorage.removeItem("rol");
             localStorage.removeItem("token");
             localStorage.removeItem("id");

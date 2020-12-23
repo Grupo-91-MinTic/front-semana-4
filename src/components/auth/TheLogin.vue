@@ -9,7 +9,7 @@
             style="max-width: 750px; margin: auto"
             class="overflow-hidden info pa-12 mt-12 login"
           >
-            <form @submit.prevent="loginUser">
+            <form>
               <v-avatar>
                 <img
                   src="https://img.icons8.com/dusk/64/000000/change-user-male.png"
